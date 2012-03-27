@@ -38,5 +38,4 @@ namespace PaperStoneScissors.Test.Steps
             Assert.That(() => game.GetWinner(), Throws.An<GameNotCompletedException>());
         }
     }
-
 }

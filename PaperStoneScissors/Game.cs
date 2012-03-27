@@ -5,12 +5,6 @@ using System.Text;
 
 namespace PaperStoneScissors
 {
-    public enum RoundResult
-    {
-        Lose,
-        Win
-    }
-
     public class Game
     {
         private IList<RoundResult[]> roundResults = new List<RoundResult[]>();
