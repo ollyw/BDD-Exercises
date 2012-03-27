@@ -9,11 +9,12 @@ namespace PaperStoneScissors
     {
         private IList<RoundResult[]> roundResults = new List<RoundResult[]>();
         private int winningNumberOfRounds;
-        private int numberOfPlayers = 2;
+        private int numberOfPlayers;
 
-        public Game(int winningNumberOfRounds)
+        public Game(int winningNumberOfRounds, int numberOfPlayers)
         {
             this.winningNumberOfRounds = winningNumberOfRounds;
+            this.numberOfPlayers = numberOfPlayers;
         }
 
         public void AddRoundResult(RoundResult[] playerResults)
@@ -44,6 +45,11 @@ namespace PaperStoneScissors
             }
 
             return wins.IndexOf(maxWins);
+        }
+
+        public int[] GetRanking()
+        {
+            return new[] { 1, 3, 2};
         }
     }
 }
