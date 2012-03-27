@@ -7,6 +7,7 @@ namespace PaperStoneScissors
 {
     public enum RoundResult
     {
+        Draw,
         Lose,
         Win
     }

@@ -9,12 +9,6 @@ using NHamcrest.Core;
 
 namespace PaperStoneScissors.Test.Steps
 {
-    public class PlayerRank
-    {
-        public int Player { get; set; }
-        public int Rank;
-    }
-
     [Binding]
     public class StepDefinitions
     {
@@ -54,11 +48,7 @@ namespace PaperStoneScissors.Test.Steps
         [Then(@"the following results are expected")]
         public void ThenTheFollowResultsAreExpected(Table table)
         {
-            IEnumerable<PlayerRank> ranking = table.CreateSet<PlayerRank>();
-
-            var expectedRanking = (from rank in ranking
-                                  orderby rank.Rank
-                                  select rank.Player).ToArray();
+            IEnumerable<PlayerRank> expectedRanking = table.CreateSet<PlayerRank>();
 
             var actualRanking = game.GetRanking();
 

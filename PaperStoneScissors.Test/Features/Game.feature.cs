@@ -11,7 +11,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace PaperStoneScissors.Test
+namespace PaperStoneScissors.Test.Features
 {
     using TechTalk.SpecFlow;
     
@@ -152,6 +152,128 @@ this.ScenarioSetup(scenarioInfo);
                         "2"});
 #line 24
  testRunner.Then("the following results are expected", ((string)(null)), table2);
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [MbUnit.Framework.TestAttribute()]
+        [MbUnit.Framework.DescriptionAttribute("Three players, first to three with a draw")]
+        public virtual void ThreePlayersFirstToThreeWithADraw()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Three players, first to three with a draw", ((string[])(null)));
+#line 30
+this.ScenarioSetup(scenarioInfo);
+#line 31
+ testRunner.Given("a game with 3 players and first to 3 game");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Round",
+                        "Player 1",
+                        "Player 2",
+                        "Player 3"});
+            table3.AddRow(new string[] {
+                        "1",
+                        "win",
+                        "lose",
+                        "lose"});
+            table3.AddRow(new string[] {
+                        "2",
+                        "draw",
+                        "draw",
+                        "draw"});
+            table3.AddRow(new string[] {
+                        "3",
+                        "lose",
+                        "lose",
+                        "win"});
+            table3.AddRow(new string[] {
+                        "4",
+                        "win",
+                        "lose",
+                        "lose"});
+            table3.AddRow(new string[] {
+                        "5",
+                        "win",
+                        "lose",
+                        "lose"});
+#line 32
+ testRunner.When("the following rounds are played", ((string)(null)), table3);
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Rank",
+                        "Player"});
+            table4.AddRow(new string[] {
+                        "1",
+                        "1"});
+            table4.AddRow(new string[] {
+                        "2",
+                        "3"});
+            table4.AddRow(new string[] {
+                        "3",
+                        "2"});
+#line 39
+ testRunner.Then("the following results are expected", ((string)(null)), table4);
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [MbUnit.Framework.TestAttribute()]
+        [MbUnit.Framework.DescriptionAttribute("Three players, first to three with a joint second place")]
+        public virtual void ThreePlayersFirstToThreeWithAJointSecondPlace()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Three players, first to three with a joint second place", ((string[])(null)));
+#line 46
+this.ScenarioSetup(scenarioInfo);
+#line 47
+ testRunner.Given("a game with 3 players and first to 3 game");
+#line hidden
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Round",
+                        "Player 1",
+                        "Player 2",
+                        "Player 3"});
+            table5.AddRow(new string[] {
+                        "1",
+                        "win",
+                        "lose",
+                        "lose"});
+            table5.AddRow(new string[] {
+                        "2",
+                        "lose",
+                        "win",
+                        "lose"});
+            table5.AddRow(new string[] {
+                        "3",
+                        "lose",
+                        "lose",
+                        "win"});
+            table5.AddRow(new string[] {
+                        "4",
+                        "win",
+                        "lose",
+                        "lose"});
+            table5.AddRow(new string[] {
+                        "5",
+                        "win",
+                        "lose",
+                        "lose"});
+#line 48
+ testRunner.When("the following rounds are played", ((string)(null)), table5);
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Rank",
+                        "Player"});
+            table6.AddRow(new string[] {
+                        "1",
+                        "1"});
+            table6.AddRow(new string[] {
+                        "2",
+                        "2"});
+            table6.AddRow(new string[] {
+                        "2",
+                        "3"});
+#line 55
+ testRunner.Then("the following results are expected", ((string)(null)), table6);
 #line hidden
             this.ScenarioCleanup();
         }

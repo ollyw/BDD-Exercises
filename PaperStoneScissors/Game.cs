@@ -7,49 +7,100 @@ namespace PaperStoneScissors
 {
     public class Game
     {
-        private IList<RoundResult[]> roundResults = new List<RoundResult[]>();
+        private class PlayerRound
+        {
+            public int Round { get; set; }
+            public RoundResult Result { get; set; }
+        }
+
+        private class Player
+        {
+            public Player()
+	        {
+                Rounds = new List<PlayerRound>();
+            }
+
+            public int PlayerId { get; set; }
+            public IList<PlayerRound> Rounds { get; private set; }
+
+            public int Wins
+            {
+                get
+                {
+                    return Rounds.Count(x => x.Result == RoundResult.Win);
+                }
+            }
+        }
+
+        private IDictionary<int, Player> Players;
         private int winningNumberOfRounds;
-        private int numberOfPlayers;
 
         public Game(int winningNumberOfRounds, int numberOfPlayers)
         {
             this.winningNumberOfRounds = winningNumberOfRounds;
-            this.numberOfPlayers = numberOfPlayers;
+            Players = new Dictionary<int, Player>();
+            for (int p = 0; p < numberOfPlayers; p++)
+            {
+                var id = p + 1;
+                Players.Add(id, new Player() { PlayerId = id });
+            }
         }
 
         public void AddRoundResult(RoundResult[] playerResults)
         {
-            if (playerResults.Length != numberOfPlayers)
+            if (playerResults.Length != Players.Count)
                 throw new ArgumentException("incorrect number of results");
 
-            roundResults.Add(playerResults);
+            for(var p = 0; p < playerResults.Length; p++)
+            {
+                var id = p + 1;
+                Players[id].Rounds.Add(new PlayerRound()
+                {
+                    Result = playerResults[p],
+                    Round = Players[id].Rounds.Count + 1
+                });
+            }
         }
     
         public int GetWinner()
         {
-            List<int> wins = new List<int>();
-
-            for (int p = 0; p < numberOfPlayers; p++)
-            {
-                wins.Add((from round in roundResults
-                           where round[p] == RoundResult.Win
-                           select 1
-                            ).Count());
-            }
-
-            int maxWins = wins.Max();
+            int maxWins = Players.Values.Max(x => x.Wins);
 
             if (maxWins != winningNumberOfRounds)
             {
                 throw new GameNotCompletedException();
             }
 
-            return wins.IndexOf(maxWins);
+            return (from p in Players.Values
+                    where p.Wins == maxWins
+                    select p.PlayerId).Single();
         }
 
-        public int[] GetRanking()
+        public IEnumerable<PlayerRank> GetRanking()
         {
-            return new[] { 1, 3, 2};
+            var orderedPlayers = from player in Players.Values
+                          orderby player.Wins descending, player.PlayerId
+                          select player;
+
+            int currentRank = 0;
+            int lastNumberOfWins = 0;
+            var ranking = new List<PlayerRank>();
+
+            foreach (var player in orderedPlayers)
+            {
+                if (lastNumberOfWins != player.Wins)
+                {
+                    lastNumberOfWins = player.Wins;
+                    currentRank++;
+                }
+                ranking.Add(new PlayerRank() { Player = player.PlayerId, Rank = currentRank });
+            }
+
+            var orderedRanking = from rank in ranking
+                                 orderby rank.Rank, rank.Player
+                                 select rank;
+
+            return orderedRanking.ToArray();
         }
     }
 }
