@@ -59,6 +59,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Game.feature</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\HelperExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steps\GameSteps.cs" />
   </ItemGroup>

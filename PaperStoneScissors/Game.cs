@@ -7,31 +7,6 @@ namespace PaperStoneScissors
 {
     public class Game
     {
-        private class PlayerRound
-        {
-            public int Round { get; set; }
-            public RoundResult Result { get; set; }
-        }
-
-        private class Player
-        {
-            public Player()
-	        {
-                Rounds = new List<PlayerRound>();
-            }
-
-            public int PlayerId { get; set; }
-            public IList<PlayerRound> Rounds { get; private set; }
-
-            public int Wins
-            {
-                get
-                {
-                    return Rounds.Count(x => x.Result == RoundResult.Win);
-                }
-            }
-        }
-
         private IDictionary<int, Player> Players;
         private int winningNumberOfRounds;
 
@@ -64,20 +39,23 @@ namespace PaperStoneScissors
     
         public int GetWinner()
         {
+            return GetRanking().First().Player;
+        }
+
+        private void CheckGameIsComplete()
+        {
             int maxWins = Players.Values.Max(x => x.Wins);
 
             if (maxWins != winningNumberOfRounds)
             {
                 throw new GameNotCompletedException();
             }
-
-            return (from p in Players.Values
-                    where p.Wins == maxWins
-                    select p.PlayerId).Single();
         }
 
         public IEnumerable<PlayerRank> GetRanking()
         {
+            CheckGameIsComplete();
+
             var orderedPlayers = from player in Players.Values
                           orderby player.Wins descending, player.PlayerId
                           select player;

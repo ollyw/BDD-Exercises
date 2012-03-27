@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.Assist;
 using MbUnit.Framework;
 using NHamcrest.Core;
+using PaperStoneScissors.Test.Helpers;
+using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
 
 namespace PaperStoneScissors.Test.Steps
 {
@@ -61,12 +62,11 @@ namespace PaperStoneScissors.Test.Steps
             foreach (var row in table.Rows)
             {
                 RoundResult[] round = new RoundResult[3];
-                round[0] = (RoundResult)Enum.Parse(typeof(RoundResult), row["Player 1"], true);
-                round[1] = (RoundResult)Enum.Parse(typeof(RoundResult), row["Player 2"], true);
-                round[2] = (RoundResult)Enum.Parse(typeof(RoundResult), row["Player 3"], true);
+                round[0] = row["Player 1"].ToRoundResult();
+                round[1] = row["Player 2"].ToRoundResult();
+                round[2] = row["Player 3"].ToRoundResult();
                 game.AddRoundResult(round);
             }
-            
         }
     }
 }
