@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="Gallio" />
     <Reference Include="MbUnit" />
+    <Reference Include="NHamcrest, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31c3ea0b6fcf8c4a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -59,6 +60,7 @@
       <DependentUpon>Game.feature</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Steps\GameSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -67,6 +69,15 @@
       <LastGenOutput>Game.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PaperStoneScissors\PaperStoneScissors.csproj">
+      <Project>{7121B20E-4166-402C-82B8-1BC93B5FB58B}</Project>
+      <Name>PaperStoneScissors</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

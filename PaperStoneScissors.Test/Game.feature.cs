@@ -67,10 +67,10 @@ namespace PaperStoneScissors.Test
         }
         
         [MbUnit.Framework.TestAttribute()]
-        [MbUnit.Framework.DescriptionAttribute("Two players, three round game")]
-        public virtual void TwoPlayersThreeRoundGame()
+        [MbUnit.Framework.DescriptionAttribute("Two players, one round game")]
+        public virtual void TwoPlayersOneRoundGame()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Two players, three round game", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Two players, one round game", ((string[])(null)));
 #line 6
 this.ScenarioSetup(scenarioInfo);
 #line 7
@@ -79,6 +79,23 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.When("I lose one round");
 #line 9
  testRunner.Then("I should lose the game");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [MbUnit.Framework.TestAttribute()]
+        [MbUnit.Framework.DescriptionAttribute("Two players, three round game")]
+        public virtual void TwoPlayersThreeRoundGame()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Two players, three round game", ((string[])(null)));
+#line 11
+this.ScenarioSetup(scenarioInfo);
+#line 12
+ testRunner.Given("I have chosen a first to 3 game");
+#line 13
+ testRunner.When("I lose one round");
+#line 14
+ testRunner.Then("the game should not be complete");
 #line hidden
             this.ScenarioCleanup();
         }

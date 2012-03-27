@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaperStoneScissors.Test", "PaperStoneScissors.Test.csproj", "{EB638B51-CFE2-4935-BDFD-3046E6037ACF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaperStoneScissors", "..\PaperStoneScissors\PaperStoneScissors.csproj", "{7121B20E-4166-402C-82B8-1BC93B5FB58B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{EB638B51-CFE2-4935-BDFD-3046E6037ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB638B51-CFE2-4935-BDFD-3046E6037ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB638B51-CFE2-4935-BDFD-3046E6037ACF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7121B20E-4166-402C-82B8-1BC93B5FB58B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7121B20E-4166-402C-82B8-1BC93B5FB58B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7121B20E-4166-402C-82B8-1BC93B5FB58B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7121B20E-4166-402C-82B8-1BC93B5FB58B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
