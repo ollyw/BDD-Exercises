@@ -84,6 +84,114 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [MbUnit.Framework.TestAttribute()]
+        [MbUnit.Framework.DescriptionAttribute("Two players, five round game")]
+        public virtual void TwoPlayersFiveRoundGame()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Two players, five round game", ((string[])(null)));
+#line 11
+this.ScenarioSetup(scenarioInfo);
+#line 12
+ testRunner.Given("I have chosen a best of 5 game");
+#line 13
+ testRunner.When("I win 2 rounds");
+#line 14
+ testRunner.Then("the game should not be complete");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [MbUnit.Framework.TestAttribute()]
+        [MbUnit.Framework.DescriptionAttribute("Three players, best of five")]
+        public virtual void ThreePlayersBestOfFive()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Three players, best of five", ((string[])(null)));
+#line 16
+this.ScenarioSetup(scenarioInfo);
+#line 17
+ testRunner.Given("a game with 3 players and best of 5");
+#line hidden
+            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Round",
+                        "Player 1",
+                        "Player 2",
+                        "Player 3"});
+            table1.AddRow(new string[] {
+                        "1",
+                        "win",
+                        "lose",
+                        "lose"});
+            table1.AddRow(new string[] {
+                        "2",
+                        "win",
+                        "lose",
+                        "lose"});
+            table1.AddRow(new string[] {
+                        "3",
+                        "lose",
+                        "win",
+                        "lose"});
+            table1.AddRow(new string[] {
+                        "4",
+                        "win",
+                        "lose",
+                        "lose"});
+#line 18
+ testRunner.When("the following rounds are played", ((string)(null)), table1);
+#line 24
+ testRunner.Then("player 1 should be the winner");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [MbUnit.Framework.TestAttribute()]
+        [MbUnit.Framework.DescriptionAttribute("Three players, best of seven")]
+        public virtual void ThreePlayersBestOfSeven()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Three players, best of seven", ((string[])(null)));
+#line 26
+this.ScenarioSetup(scenarioInfo);
+#line 27
+ testRunner.Given("a game with 3 players and best of 5");
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Round",
+                        "Player 1",
+                        "Player 2",
+                        "Player 3"});
+            table2.AddRow(new string[] {
+                        "1",
+                        "win",
+                        "lose",
+                        "lose"});
+            table2.AddRow(new string[] {
+                        "2",
+                        "lose",
+                        "win",
+                        "lose"});
+            table2.AddRow(new string[] {
+                        "3",
+                        "lose",
+                        "lose",
+                        "win"});
+            table2.AddRow(new string[] {
+                        "4",
+                        "draw",
+                        "draw",
+                        "draw"});
+            table2.AddRow(new string[] {
+                        "5",
+                        "lose",
+                        "win",
+                        "lose"});
+#line 28
+ testRunner.When("the following rounds are played", ((string)(null)), table2);
+#line 35
+ testRunner.Then("player 2 should be the winner");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

@@ -14,7 +14,7 @@ Scenario: Two players, best of three not completed
 	Then the game should not be complete
 
 Scenario: Three players, first to three
-	Given a game with 3 players and first to 3 game
+	Given a game with 3 players and first to 3
 	When the following rounds are played
 		| Round | Player 1 | Player 2 | Player 3 |
 		| 1     | win      | lose     | lose     |
@@ -28,7 +28,7 @@ Scenario: Three players, first to three
 		| 3    | 2      |
 
 Scenario: Three players, first to three with a draw
-	Given a game with 3 players and first to 3 game
+	Given a game with 3 players and first to 3
 	When the following rounds are played
 		| Round | Player 1 | Player 2 | Player 3 |
 		| 1     | win      | lose     | lose     |
@@ -42,9 +42,8 @@ Scenario: Three players, first to three with a draw
 		| 2    | 3      |
 		| 3    | 2      |
 
-
 Scenario: Three players, first to three with a joint second place
-	Given a game with 3 players and first to 3 game
+	Given a game with 3 players and first to 3
 	When the following rounds are played
 		| Round | Player 1 | Player 2 | Player 3 |
 		| 1     | win      | lose     | lose     |
@@ -57,4 +56,3 @@ Scenario: Three players, first to three with a joint second place
 		| 1    | 1      |
 		| 2    | 2      |
 		| 2    | 3      |
-

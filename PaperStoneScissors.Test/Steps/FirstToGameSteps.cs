@@ -17,13 +17,13 @@ namespace PaperStoneScissors.Test.Steps
             }
         }
 
-        [Given(@"I have chosen a first to (.*) game(?:|s)")]
+        [Given(@"I have chosen a first to (\d*) game")]
         public void GivenIHaveChosenAFirstToXGames(int winningNumberOfRounds)
         {
             Game = new Game(2, new FirstToGamePlayingStrategy(winningNumberOfRounds));
         }
 
-        [Given(@"a game with (.*) players and first to (.*) game(?:|s)")]
+        [Given(@"a game with (\d*) players and first to (\d*)")]
         public void GivenAGameWithXPlayersAndFirstToYGames(int numberOfPlayers, int winningNumberOfRounds)
         {
             Game = new Game(numberOfPlayers, new FirstToGamePlayingStrategy(winningNumberOfRounds));

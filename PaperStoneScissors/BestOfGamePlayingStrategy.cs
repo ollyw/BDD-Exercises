@@ -16,7 +16,25 @@ namespace PaperStoneScissors
 
         public bool CheckIfGameIsComplete(IEnumerable<Player> players)
         {
-            return players.First().Rounds.Count == 2;
+            var roundsPlayed = players.First().Rounds.Count;
+
+            if (roundsPlayed == maximumNumberOfRounds)
+            {
+                return true;
+            }
+
+            var orderedPlayers = (from p in players
+                             orderby p.Wins descending
+                             select p).ToList();
+
+            var leader = orderedPlayers[0];
+            var firstRunnerUp = orderedPlayers[1];
+            
+            var leaderLead = leader.Wins - firstRunnerUp.Wins;
+            var roundsLeft = maximumNumberOfRounds - roundsPlayed;
+
+            return (leaderLead > roundsLeft);
+            
         }
     }
 }

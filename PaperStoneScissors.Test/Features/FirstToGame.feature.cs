@@ -110,7 +110,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 16
 this.ScenarioSetup(scenarioInfo);
 #line 17
- testRunner.Given("a game with 3 players and first to 3 game");
+ testRunner.Given("a game with 3 players and first to 3");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Round",
@@ -166,7 +166,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 30
 this.ScenarioSetup(scenarioInfo);
 #line 31
- testRunner.Given("a game with 3 players and first to 3 game");
+ testRunner.Given("a game with 3 players and first to 3");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "Round",
@@ -224,10 +224,10 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void ThreePlayersFirstToThreeWithAJointSecondPlace()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Three players, first to three with a joint second place", ((string[])(null)));
-#line 46
+#line 45
 this.ScenarioSetup(scenarioInfo);
-#line 47
- testRunner.Given("a game with 3 players and first to 3 game");
+#line 46
+ testRunner.Given("a game with 3 players and first to 3");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         "Round",
@@ -259,7 +259,7 @@ this.ScenarioSetup(scenarioInfo);
                         "win",
                         "lose",
                         "lose"});
-#line 48
+#line 47
  testRunner.When("the following rounds are played", ((string)(null)), table5);
 #line hidden
             TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
@@ -274,7 +274,7 @@ this.ScenarioSetup(scenarioInfo);
             table6.AddRow(new string[] {
                         "2",
                         "3"});
-#line 55
+#line 54
  testRunner.Then("the following results are expected", ((string)(null)), table6);
 #line hidden
             this.ScenarioCleanup();

@@ -53,7 +53,7 @@ namespace PaperStoneScissors.Test.Steps
             Assert.That(actualRanking.SequenceEqual(expectedRanking), Is.True());
         }
 
-        [When(@"I win (.*) round(?:|s)")]
+        [When(@"I win (\d*) round(?:|s)")]
         public void WhenIWinXRounds(int rounds)
         {
             for (int i = 0; i < rounds; i++)
@@ -83,6 +83,12 @@ namespace PaperStoneScissors.Test.Steps
         {
             // TODO: See if we can explicitly check for not throwing an exception
             Assert.That(Game.GetRanking(), Is.Anything());
+        }
+
+        [Then(@"player (\d*) should be the winner")]
+        public void ThenPlayerNShouldBeTheWinner(int playerNumber)
+        {
+            Assert.That(Game.GetWinner(), Is.EqualTo(playerNumber));
         }
     }
 }

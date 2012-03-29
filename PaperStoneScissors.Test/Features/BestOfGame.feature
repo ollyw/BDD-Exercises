@@ -7,3 +7,29 @@ Scenario: Two players, three round game
 	Given I have chosen a best of 3 game
 	When I win 2 rounds
 	Then the game should be complete
+
+Scenario: Two players, five round game
+	Given I have chosen a best of 5 game
+	When I win 2 rounds
+	Then the game should not be complete
+
+Scenario: Three players, best of five
+	Given a game with 3 players and best of 5
+	When the following rounds are played
+		| Round | Player 1 | Player 2 | Player 3 |
+		| 1     | win      | lose     | lose     |
+		| 2     | win      | lose     | lose     |
+		| 3     | lose     | win      | lose     |
+		| 4     | win      | lose     | lose     |
+	Then player 1 should be the winner
+
+Scenario: Three players, best of seven
+	Given a game with 3 players and best of 5
+	When the following rounds are played
+		| Round | Player 1 | Player 2 | Player 3 |
+		| 1     | win      | lose     | lose     |
+		| 2     | lose     | win      | lose     |
+		| 3     | lose     | lose     | win      |
+		| 4     | draw     | draw     | draw     |
+		| 5     | lose     | win      | lose     |
+	Then player 2 should be the winner
