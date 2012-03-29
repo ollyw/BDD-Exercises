@@ -40,7 +40,18 @@ namespace PaperStoneScissors
     
         public int GetWinner()
         {
-            return GetRanking().First().Player;
+            var ranking = GetRanking();
+
+            var numberOfTopRankers = (from r in ranking
+                                     where r.Rank == 1
+                                     select r).Count();
+
+            if (numberOfTopRankers > 1)
+            {
+                throw new GameCompletedWithDrawException();
+            }
+
+            return ranking.First().Player;
         }
 
         private void CheckGameIsComplete()
@@ -60,7 +71,7 @@ namespace PaperStoneScissors
                           select player;
 
             int currentRank = 0;
-            int lastNumberOfWins = 0;
+            int lastNumberOfWins = -1;
             var ranking = new List<PlayerRank>();
 
             foreach (var player in orderedPlayers)

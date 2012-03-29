@@ -192,6 +192,44 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [MbUnit.Framework.TestAttribute()]
+        [MbUnit.Framework.DescriptionAttribute("Three players, best of three with no winner")]
+        public virtual void ThreePlayersBestOfThreeWithNoWinner()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Three players, best of three with no winner", ((string[])(null)));
+#line 37
+this.ScenarioSetup(scenarioInfo);
+#line 38
+ testRunner.Given("a game with 3 players and best of 3");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Round",
+                        "Player 1",
+                        "Player 2",
+                        "Player 3"});
+            table3.AddRow(new string[] {
+                        "1",
+                        "draw",
+                        "draw",
+                        "draw"});
+            table3.AddRow(new string[] {
+                        "2",
+                        "draw",
+                        "draw",
+                        "draw"});
+            table3.AddRow(new string[] {
+                        "3",
+                        "draw",
+                        "draw",
+                        "draw"});
+#line 39
+ testRunner.When("the following rounds are played", ((string)(null)), table3);
+#line 44
+ testRunner.Then("there should be no winner");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

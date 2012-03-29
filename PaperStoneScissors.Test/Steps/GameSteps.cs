@@ -90,5 +90,11 @@ namespace PaperStoneScissors.Test.Steps
         {
             Assert.That(Game.GetWinner(), Is.EqualTo(playerNumber));
         }
+
+        [Then(@"there should be no winner")]
+        public void ThenThereShouldBeNoWinner()
+        {
+            Assert.That(() => Game.GetWinner(), Throws.An<GameCompletedWithDrawException>());
+        }
     }
 }

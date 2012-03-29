@@ -33,3 +33,12 @@ Scenario: Three players, best of seven
 		| 4     | draw     | draw     | draw     |
 		| 5     | lose     | win      | lose     |
 	Then player 2 should be the winner
+
+Scenario: Three players, best of three with no winner
+	Given a game with 3 players and best of 3
+	When the following rounds are played
+		| Round | Player 1 | Player 2 | Player 3 |
+		| 1     | draw     | draw     | draw     |
+		| 2     | draw     | draw     | draw     |
+		| 3     | draw     | draw     | draw     |
+	Then there should be no winner
