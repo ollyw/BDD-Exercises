@@ -40,9 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BestOfGamePlayingStrategy.cs" />
+    <Compile Include="FirstOfGamePlayingStrategy.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameNotCompletedException.cs" />
     <Compile Include="GameType.cs" />
+    <Compile Include="IGamePlayingStrategy.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerRank.cs" />
     <Compile Include="PlayerRound.cs" />

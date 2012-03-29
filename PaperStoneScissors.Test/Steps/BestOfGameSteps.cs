@@ -18,9 +18,9 @@ namespace PaperStoneScissors.Test.Steps
         }
 
         [Given(@"I have chosen a best of (.*) game(?:|s)")]
-        public void GivenIHaveChosenABestOfXGame(int games)
+        public void GivenIHaveChosenABestOfXGames(int maximumNumberOfGames)
         {
-            Game = new Game(3, 2, GameType.BestOf);
+            Game = new Game(2, new BestOfGamePlayingStrategy(maximumNumberOfGames));
         }
     }
 }

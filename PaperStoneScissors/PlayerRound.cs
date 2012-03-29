@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PaperStoneScissors
 {
-    internal class PlayerRound
+    public class PlayerRound
     {
         public int Round { get; set; }
         public RoundResult Result { get; set; }
