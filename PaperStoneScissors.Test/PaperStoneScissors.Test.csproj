@@ -54,20 +54,31 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\Game.feature.cs">
+    <Compile Include="Features\BestOfGame.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Game.feature</DependentUpon>
+      <DependentUpon>BestOfGame.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\FirstToGame.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FirstToGame.feature</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HelperExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Steps\BestOfGameSteps.cs" />
+    <Compile Include="Steps\FirstToGameSteps.cs" />
     <Compile Include="Steps\GameSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Features\Game.feature">
+    <None Include="Features\BestOfGame.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Game.feature.cs</LastGenOutput>
+      <LastGenOutput>BestOfGame.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\FirstToGame.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>FirstToGame.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

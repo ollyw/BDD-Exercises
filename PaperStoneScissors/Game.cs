@@ -9,8 +9,9 @@ namespace PaperStoneScissors
     {
         private IDictionary<int, Player> Players;
         private int winningNumberOfRounds;
+        private GameType gameType;
 
-        public Game(int winningNumberOfRounds, int numberOfPlayers)
+        public Game(int winningNumberOfRounds, int numberOfPlayers, GameType gameType)
         {
             this.winningNumberOfRounds = winningNumberOfRounds;
             Players = new Dictionary<int, Player>();
@@ -19,6 +20,8 @@ namespace PaperStoneScissors
                 var id = p + 1;
                 Players.Add(id, new Player() { PlayerId = id });
             }
+            
+            this.gameType = gameType;
         }
 
         public void AddRoundResult(RoundResult[] playerResults)
@@ -44,11 +47,21 @@ namespace PaperStoneScissors
 
         private void CheckGameIsComplete()
         {
-            int maxWins = Players.Values.Max(x => x.Wins);
-
-            if (maxWins != winningNumberOfRounds)
+            if (gameType == GameType.BestOf)
             {
-                throw new GameNotCompletedException();
+                if (Players.Values.First().Rounds.Count < 2)
+                {
+                    throw new GameNotCompletedException();
+                }
+            }
+            else
+            {
+                int maxWins = Players.Values.Max(x => x.Wins);
+
+                if (maxWins != winningNumberOfRounds)
+                {
+                    throw new GameNotCompletedException();
+                }
             }
         }
 

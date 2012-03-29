@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Game.cs" />
     <Compile Include="GameNotCompletedException.cs" />
+    <Compile Include="GameType.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerRank.cs" />
     <Compile Include="PlayerRound.cs" />

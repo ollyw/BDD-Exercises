@@ -19,22 +19,24 @@ namespace PaperStoneScissors.Test.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.8.1.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [MbUnit.Framework.TestFixtureAttribute()]
-    [MbUnit.Framework.DescriptionAttribute("In order to play a game\r\nAs a Paper Stone Scissors enthusiast\r\nI want to be able " +
-        "to play one or more rounds against multiple players")]
-    public partial class MultipleRoundsFeature
+    [MbUnit.Framework.DescriptionAttribute("In order to play a game that results in a single winner\r\nAs a Paper Stone Scissor" +
+        "s enthusiast\r\nI want to be able to play a game that finishes when the first play" +
+        "er reaches a given number of wins")]
+    public partial class First_ToStyleGamePlayFeature
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "Game.feature"
+#line 1 "FirstToGame.feature"
 #line hidden
         
         [MbUnit.Framework.FixtureSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Multiple rounds", "In order to play a game\r\nAs a Paper Stone Scissors enthusiast\r\nI want to be able " +
-                    "to play one or more rounds against multiple players", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "First-To Style Game Play", "In order to play a game that results in a single winner\r\nAs a Paper Stone Scissor" +
+                    "s enthusiast\r\nI want to be able to play a game that finishes when the first play" +
+                    "er reaches a given number of wins", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -76,7 +78,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 7
  testRunner.Given("I have chosen a first to 1 game");
 #line 8
- testRunner.When("I lose one round");
+ testRunner.When("I lose 1 round");
 #line 9
  testRunner.Then("I should lose the game");
 #line hidden
@@ -93,7 +95,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 12
  testRunner.Given("I have chosen a first to 3 game");
 #line 13
- testRunner.When("I lose one round");
+ testRunner.When("I lose 1 round");
 #line 14
  testRunner.Then("the game should not be complete");
 #line hidden
