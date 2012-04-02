@@ -48,6 +48,7 @@
     <Compile Include="GameObjects.cs" />
     <Compile Include="GameType.cs" />
     <Compile Include="IGamePlayingStrategy.cs" />
+    <Compile Include="IRound.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerRank.cs" />
     <Compile Include="PlayerRound.cs" />

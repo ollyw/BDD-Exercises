@@ -32,8 +32,10 @@ namespace PaperStoneScissors.Test.Steps
         [When(@"I lose 1 round(?:|s)")]
         public void WhenILoseXRounds()
         {
-            // TODO: Does this API need cleaning up/simplifying?
-            Game.AddRoundResult(new RoundResult[] {RoundResult.Lose, RoundResult.Win});
+            var round = new Round();
+            round.AddSelection(1, RoundResult.Lose.MakeupObjectFromResult());
+            round.AddSelection(2, RoundResult.Win.MakeupObjectFromResult());
+            Game.AddRoundResult(round);
         }
 
         [Then(@"the game should not be complete")]
@@ -53,13 +55,15 @@ namespace PaperStoneScissors.Test.Steps
             Assert.That(actualRanking.SequenceEqual(expectedRanking), Is.True());
         }
 
-        [When(@"I win (\d*) round(?:|s)")]
+        [When(@"I win (\d+) round(?:|s)")]
         public void WhenIWinXRounds(int rounds)
         {
             for (int i = 0; i < rounds; i++)
             {
-                // TODO: Does this API need cleaning up/simplifying?
-                Game.AddRoundResult(new RoundResult[] { RoundResult.Win, RoundResult.Lose });
+                var round = new Round();
+                round.AddSelection(1, RoundResult.Win.MakeupObjectFromResult());
+                round.AddSelection(2, RoundResult.Lose.MakeupObjectFromResult());
+                Game.AddRoundResult(round);
             }
         }
 
@@ -70,10 +74,10 @@ namespace PaperStoneScissors.Test.Steps
             foreach (var row in table.Rows)
             {
                 // TODO: Adapter this for multiple sets of players
-                RoundResult[] round = new RoundResult[3];
-                round[0] = row["Player 1"].ToRoundResult();
-                round[1] = row["Player 2"].ToRoundResult();
-                round[2] = row["Player 3"].ToRoundResult();
+                var round = new Round();
+                round.AddSelection(1, row["Player 1"].ToRoundResult().MakeupObjectFromResult());
+                round.AddSelection(2, row["Player 2"].ToRoundResult().MakeupObjectFromResult());
+                round.AddSelection(3, row["Player 3"].ToRoundResult().MakeupObjectFromResult());
                 Game.AddRoundResult(round);
             }
         }
@@ -85,7 +89,7 @@ namespace PaperStoneScissors.Test.Steps
             Assert.That(Game.GetRanking(), Is.Anything());
         }
 
-        [Then(@"player (\d*) should be the winner")]
+        [Then(@"player (\d+) should be the winner")]
         public void ThenPlayerNShouldBeTheWinner(int playerNumber)
         {
             Assert.That(Game.GetWinner(), Is.EqualTo(playerNumber));

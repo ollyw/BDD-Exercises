@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PaperStoneScissors
 {
-    public class Round
+    public class Round : IRound
     {
         private IDictionary<int, GameObject> selections = new Dictionary<int, GameObject>();
 
@@ -48,7 +48,8 @@ namespace PaperStoneScissors
             if (results.All(x => x.Value == RoundResult.Lose))
             {
                 results = (from s in selections
-                           select new { Key = s.Key, Value = RoundResult.Draw }).ToDictionary(x => x.Key, y => y.Value); 
+                           select new { Key = s.Key, Value = RoundResult.Draw })
+                           .ToDictionary(x => x.Key, y => y.Value); 
             }
 
             return results;

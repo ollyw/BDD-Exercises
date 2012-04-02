@@ -8,7 +8,7 @@ namespace PaperStoneScissors
     public class Game
     {
         private IDictionary<int, Player> Players;
-        private IGamePlayingStrategy playingStrategy;
+        private IGamePlayingStrategy PlayingStrategy;
 
         public Game(int numberOfPlayers, IGamePlayingStrategy playingStrategy)
         {
@@ -19,21 +19,22 @@ namespace PaperStoneScissors
                 Players.Add(id, new Player() { PlayerId = id });
             }
 
-            this.playingStrategy = playingStrategy;
+            this.PlayingStrategy = playingStrategy;
         }
 
-        public void AddRoundResult(RoundResult[] playerResults)
+        public void AddRoundResult(IRound round)
         {
-            if (playerResults.Length != Players.Count)
+            var playerResults = round.GetResults();
+
+            if (playerResults.Count != Players.Count)
                 throw new ArgumentException("incorrect number of results");
 
-            for(var p = 0; p < playerResults.Length; p++)
+            foreach (var playerResult in playerResults)
             {
-                var id = p + 1;
-                Players[id].Rounds.Add(new PlayerRound()
+                Players[playerResult.Key].Rounds.Add(new PlayerRound()
                 {
-                    Result = playerResults[p],
-                    Round = Players[id].Rounds.Count + 1
+                    Result = playerResult.Value,
+                    Round = Players[playerResult.Key].Rounds.Count + 1
                 });
             }
         }
@@ -56,7 +57,7 @@ namespace PaperStoneScissors
 
         private void CheckGameIsComplete()
         {
-            if (!playingStrategy.CheckIfGameIsComplete(Players.Values))
+            if (!PlayingStrategy.CheckIfGameIsComplete(Players.Values))
             {
                 throw new GameNotCompletedException();
             }
