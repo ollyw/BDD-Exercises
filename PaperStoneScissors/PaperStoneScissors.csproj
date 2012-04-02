@@ -45,12 +45,14 @@
     <Compile Include="Game.cs" />
     <Compile Include="GameCompletedWithDrawException.cs" />
     <Compile Include="GameNotCompletedException.cs" />
+    <Compile Include="GameObjects.cs" />
     <Compile Include="GameType.cs" />
     <Compile Include="IGamePlayingStrategy.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerRank.cs" />
     <Compile Include="PlayerRound.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Round.cs" />
     <Compile Include="RoundResult.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
