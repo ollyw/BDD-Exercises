@@ -73,7 +73,7 @@ namespace PaperStoneScissors.Test.Steps
         {
             foreach (var row in table.Rows)
             {
-                // TODO: Adapter this for multiple sets of players
+                // TODO: Adapt this for multiple sets of players
                 var round = new Round();
                 round.AddSelection(1, row["Player 1"].ToRoundResult().MakeupObjectFromResult());
                 round.AddSelection(2, row["Player 2"].ToRoundResult().MakeupObjectFromResult());
