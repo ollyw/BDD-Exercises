@@ -13,11 +13,11 @@ namespace PaperStoneScissors.Test.Steps
     [Binding]
     public class StepDefinitions
     {
-        private Game Game
+        private Game<PaperStoneScissorsRound> Game
         {
             get
             {
-                return ScenarioContext.Current.Get<Game>();
+                return ScenarioContext.Current.Get<Game<PaperStoneScissorsRound>>();
             }
         }
 
@@ -32,7 +32,7 @@ namespace PaperStoneScissors.Test.Steps
         [When(@"I lose 1 round(?:|s)")]
         public void WhenILoseXRounds()
         {
-            var round = new Round();
+            var round = new PaperStoneScissorsRound(1);
             round.AddSelection(1, RoundResult.Lose.MakeupObjectFromResult());
             round.AddSelection(2, RoundResult.Win.MakeupObjectFromResult());
             Game.AddRoundResult(round);
@@ -60,7 +60,7 @@ namespace PaperStoneScissors.Test.Steps
         {
             for (int i = 0; i < rounds; i++)
             {
-                var round = new Round();
+                var round = new PaperStoneScissorsRound(i + 1);
                 round.AddSelection(1, RoundResult.Win.MakeupObjectFromResult());
                 round.AddSelection(2, RoundResult.Lose.MakeupObjectFromResult());
                 Game.AddRoundResult(round);
@@ -71,10 +71,12 @@ namespace PaperStoneScissors.Test.Steps
         [When(@"the following rounds are played")]
         public void WhenTheFollowingRoundsArePlayed(Table table)
         {
+            int roundNumber = 0;
             foreach (var row in table.Rows)
             {
+                roundNumber++;
                 // TODO: Adapt this for multiple sets of players
-                var round = new Round();
+                var round = new PaperStoneScissorsRound(roundNumber);
                 round.AddSelection(1, row["Player 1"].ToRoundResult().MakeupObjectFromResult());
                 round.AddSelection(2, row["Player 2"].ToRoundResult().MakeupObjectFromResult());
                 round.AddSelection(3, row["Player 3"].ToRoundResult().MakeupObjectFromResult());

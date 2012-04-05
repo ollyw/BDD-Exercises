@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "PlayRound";
+}
+
+<h2>PlayRound</h2>
+@using (Html.BeginForm("SaveRound", "Game")) {
+    
+    <fieldset>
+        <legend>Make your choice:</legend>
+
+        <input type="radio" name="chosenObject" id="paper" value="Paper">
+            <label for="paper">
+                <img src="@Url.Content("~/Content/paper.jpg")" alt="Paper">
+            </label>
+        </input>
+
+        <input type="radio" name="chosenObject" id="stone" value="Stone">
+            <label for="stone">
+                <img src="@Url.Content("~/Content/stone.jpg")" alt="Stone">
+            </label>
+        </input>
+
+        <input type="radio" name="chosenObject" id="scissors" value="Scissors">
+            <label for="scissors">
+                <img src="@Url.Content("~/Content/scissors.jpg")" alt="Scissors">
+            </label>
+        </input>
+    </fieldset>
+
+    <input type="submit" value="Submit my choice" />
+}

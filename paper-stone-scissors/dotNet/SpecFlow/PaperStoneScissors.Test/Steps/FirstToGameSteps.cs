@@ -9,24 +9,24 @@ namespace PaperStoneScissors.Test.Steps
     [Binding]
     public class FirstToGameSteps
     {
-        private Game Game
+        private Game<PaperStoneScissorsRound> Game
         {
             set
             {
-                ScenarioContext.Current.Set<Game>(value);
+                ScenarioContext.Current.Set<Game<PaperStoneScissorsRound>>(value);
             }
         }
 
         [Given(@"I have chosen a first to (\d*) game")]
         public void GivenIHaveChosenAFirstToXGames(int winningNumberOfRounds)
         {
-            Game = new Game(2, new FirstToGamePlayingStrategy(winningNumberOfRounds));
+            Game = new Game<PaperStoneScissorsRound>(2, new FirstToGamePlayingStrategy(winningNumberOfRounds));
         }
 
         [Given(@"a game with (\d*) players and first to (\d*)")]
         public void GivenAGameWithXPlayersAndFirstToYGames(int numberOfPlayers, int winningNumberOfRounds)
         {
-            Game = new Game(numberOfPlayers, new FirstToGamePlayingStrategy(winningNumberOfRounds));
+            Game = new Game<PaperStoneScissorsRound>(numberOfPlayers, new FirstToGamePlayingStrategy(winningNumberOfRounds));
         }
     }
 }

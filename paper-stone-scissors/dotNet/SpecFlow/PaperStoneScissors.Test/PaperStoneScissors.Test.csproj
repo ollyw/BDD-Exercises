@@ -76,6 +76,7 @@
     <Compile Include="Steps\FirstToGameSteps.cs" />
     <Compile Include="Steps\GameSteps.cs" />
     <Compile Include="Steps\ObjectComparison.cs" />
+    <Compile Include="UnitTests\GameTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

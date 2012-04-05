@@ -8,5 +8,6 @@ namespace PaperStoneScissors
     public interface IRound
     {
         IDictionary<int, RoundResult> GetResults();
+        int Number { get; }
     }
 }

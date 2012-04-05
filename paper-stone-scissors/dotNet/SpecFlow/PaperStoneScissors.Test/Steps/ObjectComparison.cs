@@ -12,7 +12,7 @@ namespace PaperStoneScissors.Test.Steps
     [Binding]
     public class ObjectComparison
     {
-        private Round round = new Round();
+        private PaperStoneScissorsRound round = new PaperStoneScissorsRound(1);
 
         [Then(@"the result for player (\d+) is (\w+)")]
         public void ThenTheResultForPlayerXIsY(int player, RoundResult expectedResult)

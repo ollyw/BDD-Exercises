@@ -5,14 +5,23 @@ using System.Text;
 
 namespace PaperStoneScissors
 {
-    public class Game
+    public class Game<RoundType> where RoundType : IRound
     {
-        private IDictionary<int, Player> Players;
-        private IGamePlayingStrategy PlayingStrategy;
+        private IDictionary<int, Player> Players { get; set; }
+        private IGamePlayingStrategy PlayingStrategy { get; set; }
+        public IList<RoundType> Rounds { get; private set; }
+        public bool Complete { get; private set; }
 
         public Game(int numberOfPlayers, IGamePlayingStrategy playingStrategy)
         {
+            if (numberOfPlayers < 2)
+            {
+                throw new ArgumentOutOfRangeException("numberOfPlayers", numberOfPlayers, "A game must have two more players");
+            }
+
             Players = new Dictionary<int, Player>();
+            Rounds = new List<RoundType>();
+
             for (int p = 0; p < numberOfPlayers; p++)
             {
                 var id = p + 1;
@@ -22,9 +31,15 @@ namespace PaperStoneScissors
             this.PlayingStrategy = playingStrategy;
         }
 
-        public void AddRoundResult(IRound round)
+        public void AddRoundResult(RoundType round)
         {
+            if (Complete)
+            {
+                throw new GameAlreadyCompletedException();
+            }
+
             var playerResults = round.GetResults();
+            Rounds.Add(round);
 
             if (playerResults.Count != Players.Count)
                 throw new ArgumentException("incorrect number of results");
@@ -37,6 +52,8 @@ namespace PaperStoneScissors
                     Round = Players[playerResult.Key].Rounds.Count + 1
                 });
             }
+
+            Complete = PlayingStrategy.CheckIfGameIsComplete(Players.Values);
         }
     
         public int GetWinner()
@@ -55,17 +72,12 @@ namespace PaperStoneScissors
             return ranking.First().Player;
         }
 
-        private void CheckGameIsComplete()
+        public IEnumerable<PlayerRank> GetRanking()
         {
-            if (!PlayingStrategy.CheckIfGameIsComplete(Players.Values))
+            if (!Complete)
             {
                 throw new GameNotCompletedException();
             }
-        }
-
-        public IEnumerable<PlayerRank> GetRanking()
-        {
-            CheckGameIsComplete();
 
             var orderedPlayers = from player in Players.Values
                           orderby player.Wins descending, player.PlayerId

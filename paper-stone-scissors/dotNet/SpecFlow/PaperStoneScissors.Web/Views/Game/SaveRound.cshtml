@@ -1,0 +1,35 @@
+﻿@model IList<PaperStoneScissors.PaperStoneScissorsRound>
+@{
+    ViewBag.Title = "SaveRound";
+}
+<h2>
+    Results</h2>
+<table>
+    <thead>
+        <tr>
+            <th>
+                Round Number
+            </th>
+            @foreach (var playerSelection in Model[0].Selections)
+            {
+                <th>
+                    Player @playerSelection.Key Selection
+                </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var round in Model)
+        {
+            <tr>
+                <td>@round.Number
+                </td>
+                @foreach (var playerSelection in round.Selections)
+                {
+                    <td>@playerSelection.Value.ToString()
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

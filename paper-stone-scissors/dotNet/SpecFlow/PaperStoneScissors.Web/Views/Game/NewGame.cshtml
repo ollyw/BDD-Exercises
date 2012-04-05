@@ -1,0 +1,10 @@
+﻿@{
+    ViewBag.Title = "NewGame";
+}
+
+<h2>New Game</h2>
+@using (Html.BeginForm("NewGameDetails", "Game")) {
+    <label for="player_name">Please enter your name</label>
+    <input name="player_name" type="text" placeholder="Your name" required="true" />
+    <input type="submit" value="Let's Play!"/>
+}

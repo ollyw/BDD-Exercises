@@ -5,23 +5,30 @@ using System.Text;
 
 namespace PaperStoneScissors
 {
-    public class Round : IRound
+    public class PaperStoneScissorsRound : IRound
     {
-        private IDictionary<int, GameObject> selections = new Dictionary<int, GameObject>();
+        public IDictionary<int, GameObject> Selections { get; private set; }
+        public int Number { get; private set; }
+
+        public PaperStoneScissorsRound(int roundNumber)
+        {
+            Number = roundNumber;
+            Selections = new Dictionary<int, GameObject>();
+        }
 
         public void AddSelection(int player, GameObject gameObject)
         {
-            selections.Add(player, gameObject);
+            Selections.Add(player, gameObject);
         }
 
         public IDictionary<int, RoundResult> GetResults()
         {
             var results = new Dictionary<int, RoundResult>();
 
-            foreach (var selection in selections)
+            foreach (var selection in Selections)
             {
                 RoundResult result;
-                var comparisions = from s in selections
+                var comparisions = from s in Selections
                              where s.Key != selection.Key
                              select selection.Value.Compare(s.Value);
 
@@ -47,34 +54,12 @@ namespace PaperStoneScissors
 
             if (results.All(x => x.Value == RoundResult.Lose))
             {
-                results = (from s in selections
+                results = (from s in Selections
                            select new { Key = s.Key, Value = RoundResult.Draw })
                            .ToDictionary(x => x.Key, y => y.Value); 
             }
 
             return results;
-        }
-    }
-
-    internal static class GameObjectHelper
-    {
-        public static RoundResult Compare(this GameObject source, GameObject target)
-        {
-            if (source == target)
-            {
-                return RoundResult.Draw;
-            }
-            else if (source == GameObject.Scissors && target == GameObject.Paper
-                || source == GameObject.Paper && target == GameObject.Stone
-                || source == GameObject.Stone && target == GameObject.Scissors)
-            {
-                return RoundResult.Win;
-            }
-            else
-            {
-                return RoundResult.Lose;
-            }
-
         }
     }
 }
