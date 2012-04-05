@@ -8,7 +8,7 @@ namespace PaperStoneScissors.Web.Controllers
     public class GameController : Controller
     {
         [HttpGet]
-        public ActionResult NewGame()
+        public ViewResult NewGame()
         {
             return View();
         }
@@ -42,7 +42,20 @@ namespace PaperStoneScissors.Web.Controllers
             round.AddSelection(2, autoCompleted);
             Game.AddRoundResult(round);
 
+            if (Game.Complete)
+            {
+                return RedirectToAction("Results");
+            }
+
             return View(Game.Rounds);
+        }
+
+        [HttpGet]
+        public ActionResult Results()
+        {
+            var results = Game.GetRanking();
+
+            return View(results);
         }
 
         private Game<Round> Game

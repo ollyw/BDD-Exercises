@@ -8,6 +8,7 @@ using PaperStoneScissors.PaperStoneScissors;
 using PaperStoneScissors.Test.Helpers;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
+using System;
 
 namespace PaperStoneScissors.Test.Steps
 {
@@ -42,14 +43,13 @@ namespace PaperStoneScissors.Test.Steps
         [Then(@"the game should not be complete")]
         public void ThenTheGameShouldNotBeComplete()
         {
+            Assert.That(Game.Complete, Is.False());
             Assert.That(() => Game.GetWinner(), Throws.An<GameNotCompletedException>());
         }
 
         [Then(@"the following results are expected")]
-        public void ThenTheFollowResultsAreExpected(Table table)
+        public void ThenTheFollowResultsAreExpected(IEnumerable<PlayerRank> expectedRanking)
         {
-            IEnumerable<PlayerRank> expectedRanking = table.CreateSet<PlayerRank>();
-
             var actualRanking = Game.GetRanking();
 
             // TODO: Hamcrest must have support for checking sequences
@@ -67,7 +67,6 @@ namespace PaperStoneScissors.Test.Steps
                 Game.AddRoundResult(round);
             }
         }
-
 
         [When(@"the following rounds are played")]
         public void WhenTheFollowingRoundsArePlayed(Table table)
@@ -88,6 +87,7 @@ namespace PaperStoneScissors.Test.Steps
         [Then(@"the game should be complete")]
         public void ThenTheGameShouldBeComplete()
         {
+            Assert.That(Game.Complete, Is.True());
             // TODO: See if we can explicitly check for not throwing an exception
             Assert.That(Game.GetRanking(), Is.Anything());
         }
@@ -102,6 +102,25 @@ namespace PaperStoneScissors.Test.Steps
         public void ThenThereShouldBeNoWinner()
         {
             Assert.That(() => Game.GetWinner(), Throws.An<GameCompletedWithDrawException>());
+        }
+
+        [StepArgumentTransformation]
+        public IEnumerable<PlayerRank> PlayerRankTransform(Table rankTable)
+        {
+            List<PlayerRank> ranking = new List<PlayerRank>();
+
+            foreach (var row in rankTable.Rows)
+            {
+                var playerRank = new PlayerRank()
+                {
+                    Player = new Player() { PlayerId = Int32.Parse(row["Player"]) },
+                    Rank = Int32.Parse(row["Rank"])
+                };
+
+                ranking.Add(playerRank);
+            }
+
+            return ranking;
         }
     }
 }

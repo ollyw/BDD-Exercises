@@ -1,0 +1,27 @@
+﻿@model IEnumerable<PaperStoneScissors.Core.PlayerRank>
+
+@{
+    ViewBag.Title = "Results";
+}
+
+<h2>Game Over</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Player</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var playerRank in Model) {
+            <tr>
+                <td>@playerRank.Rank</td>
+                <td>@playerRank.Player.PlayerId</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.ActionLink("New Game", "NewGame");
+

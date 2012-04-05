@@ -70,7 +70,7 @@ namespace PaperStoneScissors.Core
                 throw new GameCompletedWithDrawException();
             }
 
-            return ranking.First().Player;
+            return ranking.First().Player.PlayerId;
         }
 
         public IEnumerable<PlayerRank> GetRanking()
@@ -95,11 +95,11 @@ namespace PaperStoneScissors.Core
                     lastNumberOfWins = player.Wins;
                     currentRank++;
                 }
-                ranking.Add(new PlayerRank() { Player = player.PlayerId, Rank = currentRank });
+                ranking.Add(new PlayerRank() { Player = player, Rank = currentRank });
             }
 
             var orderedRanking = from rank in ranking
-                                 orderby rank.Rank, rank.Player
+                                 orderby rank.Rank, rank.Player.PlayerId
                                  select rank;
 
             return orderedRanking.ToArray();
