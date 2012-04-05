@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Gallio.Framework;
-using MbUnit.Framework;
-using MbUnit.Framework.ContractVerifiers;
+﻿using MbUnit.Framework;
 using NHamcrest.Core;
+using PaperStoneScissors.Core;
+using PaperStoneScissors.Exceptions;
+using PaperStoneScissors.PaperStoneScissors;
+using PaperStoneScissors.Strategies;
 
 namespace PaperStoneScissors.Test.UnitTests
 {
@@ -18,23 +17,23 @@ namespace PaperStoneScissors.Test.UnitTests
         [ExpectedArgumentOutOfRangeException]
         public void GameShouldThrowExceptionIfLessThanTwoPlayersAreSelected(int numberOfPlayers)
         {
-            var game = new Game<PaperStoneScissorsRound>(numberOfPlayers, new BestOfGamePlayingStrategy(1));
+            var game = new Game<Round>(numberOfPlayers, new BestOfGamePlayingStrategy(1));
         }
 
         [Test]
         public void GameShouldNotAllowAdditionalRoundsOnceComplete()
         {
-            var round1 = new PaperStoneScissorsRound(1);
-            round1.AddSelection(1, GameObject.Scissors);
-            round1.AddSelection(2, GameObject.Paper);
+            var round1 = new Round(1);
+            round1.AddSelection(1, PaperStoneScissorsGameObject.Scissors);
+            round1.AddSelection(2, PaperStoneScissorsGameObject.Paper);
 
-            var round2 = new PaperStoneScissorsRound(2);
-            round2.AddSelection(1, GameObject.Scissors);
-            round2.AddSelection(2, GameObject.Paper);
+            var round2 = new Round(2);
+            round2.AddSelection(1, PaperStoneScissorsGameObject.Scissors);
+            round2.AddSelection(2, PaperStoneScissorsGameObject.Paper);
 
             var numberOfPlayers = 2;
 
-            var game = new Game<PaperStoneScissorsRound>(numberOfPlayers, new FirstToGamePlayingStrategy(1));
+            var game = new Game<Round>(numberOfPlayers, new FirstToGamePlayingStrategy(1));
 
             game.AddRoundResult(round1);
             

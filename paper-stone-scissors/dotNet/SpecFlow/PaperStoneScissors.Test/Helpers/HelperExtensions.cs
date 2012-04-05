@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using PaperStoneScissors.PaperStoneScissors;
+using PaperStoneScissors.Core;
 
 namespace PaperStoneScissors.Test.Helpers
 {
@@ -12,14 +14,14 @@ namespace PaperStoneScissors.Test.Helpers
             return (RoundResult)Enum.Parse(typeof(RoundResult), value, true);
         }
 
-        public static GameObject MakeupObjectFromResult(this RoundResult result)
+        public static PaperStoneScissorsGameObject MakeupObjectFromResult(this RoundResult result)
         {
             // TODO: This feels extraordinarily hacky
             switch (result)
             {
-                case RoundResult.Draw: return GameObject.Paper;
-                case RoundResult.Lose: return GameObject.Scissors;
-                case RoundResult.Win: return GameObject.Stone;
+                case RoundResult.Draw: return PaperStoneScissorsGameObject.Paper;
+                case RoundResult.Lose: return PaperStoneScissorsGameObject.Scissors;
+                case RoundResult.Win: return PaperStoneScissorsGameObject.Stone;
                 default: throw new NotImplementedException();
             }
         }

@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using TechTalk.SpecFlow;
-using PaperStoneScissors;
-using MbUnit.Framework;
+﻿using MbUnit.Framework;
 using NHamcrest.Core;
+using PaperStoneScissors.Core;
+using PaperStoneScissors.PaperStoneScissors;
+using TechTalk.SpecFlow;
 
 namespace PaperStoneScissors.Test.Steps
 {
     [Binding]
     public class ObjectComparison
     {
-        private PaperStoneScissorsRound round = new PaperStoneScissorsRound(1);
+        private Round round = new Round(1);
 
         [Then(@"the result for player (\d+) is (\w+)")]
         public void ThenTheResultForPlayerXIsY(int player, RoundResult expectedResult)
@@ -22,7 +19,7 @@ namespace PaperStoneScissors.Test.Steps
         }
 
         [When(@"player (\d+) choses (\w+)")]
-        public void WhenPlayerXChosesY(int player, GameObject gameObject)
+        public void WhenPlayerXChosesY(int player, PaperStoneScissorsGameObject gameObject)
         {
             round.AddSelection(player, gameObject);
         }

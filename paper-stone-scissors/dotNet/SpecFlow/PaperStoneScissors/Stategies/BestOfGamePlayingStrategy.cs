@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using PaperStoneScissors.Core;
 
-namespace PaperStoneScissors
+namespace PaperStoneScissors.Strategies
 {
     public class BestOfGamePlayingStrategy : IGamePlayingStrategy
     {

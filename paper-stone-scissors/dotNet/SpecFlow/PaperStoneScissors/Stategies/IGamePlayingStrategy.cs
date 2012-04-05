@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using PaperStoneScissors.Core;
 
-namespace PaperStoneScissors
+namespace PaperStoneScissors.Strategies
 {
     public interface IGamePlayingStrategy
     {

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using PaperStoneScissors.Core;
+using PaperStoneScissors.PaperStoneScissors;
+using PaperStoneScissors.Strategies;
 
 namespace PaperStoneScissors.Web.Controllers
 {
@@ -17,7 +16,7 @@ namespace PaperStoneScissors.Web.Controllers
         [HttpPost]
         public ActionResult NewGameDetails()
         {
-            Game = new Game<PaperStoneScissorsRound>(2, new BestOfGamePlayingStrategy(3));
+            Game = new Game<Round>(2, new BestOfGamePlayingStrategy(3));
             return RedirectToAction("PlayRound");
         }
 
@@ -31,14 +30,14 @@ namespace PaperStoneScissors.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveRound(GameObject chosenObject)
+        public ActionResult SaveRound(PaperStoneScissorsGameObject chosenObject)
         {
             if (Game == null)
                 return RedirectToAction("NewGame");
 
             var autoCompleted = GameObjectHelper.ChoseRandom();
 
-            var round = new PaperStoneScissorsRound(Game.Rounds.Count + 1);
+            var round = new Round(Game.Rounds.Count + 1);
             round.AddSelection(1, chosenObject);
             round.AddSelection(2, autoCompleted);
             Game.AddRoundResult(round);
@@ -46,11 +45,11 @@ namespace PaperStoneScissors.Web.Controllers
             return View(Game.Rounds);
         }
 
-        private Game<PaperStoneScissorsRound> Game
+        private Game<Round> Game
         {
             get
             {
-                return this.Session["game"] as Game<PaperStoneScissorsRound>;
+                return this.Session["game"] as Game<Round>;
             }
             set
             {

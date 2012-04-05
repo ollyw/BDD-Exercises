@@ -1,22 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using PaperStoneScissors.Core;
 
-namespace PaperStoneScissors
+namespace PaperStoneScissors.PaperStoneScissors
 {
-    public class PaperStoneScissorsRound : IRound
+    public class Round : IRound
     {
-        public IDictionary<int, GameObject> Selections { get; private set; }
+        public IDictionary<int, PaperStoneScissorsGameObject> Selections { get; private set; }
         public int Number { get; private set; }
 
-        public PaperStoneScissorsRound(int roundNumber)
+        public Round(int roundNumber)
         {
             Number = roundNumber;
-            Selections = new Dictionary<int, GameObject>();
+            Selections = new Dictionary<int, PaperStoneScissorsGameObject>();
         }
 
-        public void AddSelection(int player, GameObject gameObject)
+        public void AddSelection(int player, PaperStoneScissorsGameObject gameObject)
         {
             Selections.Add(player, gameObject);
         }

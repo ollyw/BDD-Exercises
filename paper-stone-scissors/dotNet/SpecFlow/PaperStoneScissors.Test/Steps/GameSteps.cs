@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using MbUnit.Framework;
 using NHamcrest.Core;
+using PaperStoneScissors.Core;
+using PaperStoneScissors.Exceptions;
+using PaperStoneScissors.PaperStoneScissors;
 using PaperStoneScissors.Test.Helpers;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -13,11 +14,11 @@ namespace PaperStoneScissors.Test.Steps
     [Binding]
     public class StepDefinitions
     {
-        private Game<PaperStoneScissorsRound> Game
+        private Game<Round> Game
         {
             get
             {
-                return ScenarioContext.Current.Get<Game<PaperStoneScissorsRound>>();
+                return ScenarioContext.Current.Get<Game<Round>>();
             }
         }
 
@@ -32,7 +33,7 @@ namespace PaperStoneScissors.Test.Steps
         [When(@"I lose 1 round(?:|s)")]
         public void WhenILoseXRounds()
         {
-            var round = new PaperStoneScissorsRound(1);
+            var round = new Round(1);
             round.AddSelection(1, RoundResult.Lose.MakeupObjectFromResult());
             round.AddSelection(2, RoundResult.Win.MakeupObjectFromResult());
             Game.AddRoundResult(round);
@@ -60,7 +61,7 @@ namespace PaperStoneScissors.Test.Steps
         {
             for (int i = 0; i < rounds; i++)
             {
-                var round = new PaperStoneScissorsRound(i + 1);
+                var round = new Round(i + 1);
                 round.AddSelection(1, RoundResult.Win.MakeupObjectFromResult());
                 round.AddSelection(2, RoundResult.Lose.MakeupObjectFromResult());
                 Game.AddRoundResult(round);
@@ -76,7 +77,7 @@ namespace PaperStoneScissors.Test.Steps
             {
                 roundNumber++;
                 // TODO: Adapt this for multiple sets of players
-                var round = new PaperStoneScissorsRound(roundNumber);
+                var round = new Round(roundNumber);
                 round.AddSelection(1, row["Player 1"].ToRoundResult().MakeupObjectFromResult());
                 round.AddSelection(2, row["Player 2"].ToRoundResult().MakeupObjectFromResult());
                 round.AddSelection(3, row["Player 3"].ToRoundResult().MakeupObjectFromResult());

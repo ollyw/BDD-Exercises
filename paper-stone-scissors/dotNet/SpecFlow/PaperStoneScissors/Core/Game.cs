@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using PaperStoneScissors.Exceptions;
+using PaperStoneScissors.Strategies;
 
-namespace PaperStoneScissors
+namespace PaperStoneScissors.Core
 {
     public class Game<RoundType> where RoundType : IRound
     {
