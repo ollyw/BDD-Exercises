@@ -25,5 +25,17 @@ namespace PaperStoneScissors.Test.Helpers
                 default: throw new NotImplementedException();
             }
         }
+
+        public static IEnumerable<Player> GeneratePlayers(int numberOfPlayers)
+        {
+            List<Player> players = new List<Player>();
+
+            for (int i = 0; i < numberOfPlayers; i++)
+            {
+                players.Add(new Player() { Id = i + 1, Name = "Player " + i });
+            }
+
+            return players;
+        }
     }
 }

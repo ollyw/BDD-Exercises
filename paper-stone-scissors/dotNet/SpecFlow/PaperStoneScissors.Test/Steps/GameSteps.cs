@@ -113,7 +113,7 @@ namespace PaperStoneScissors.Test.Steps
             {
                 var playerRank = new PlayerRank()
                 {
-                    Player = new Player() { PlayerId = Int32.Parse(row["Player"]) },
+                    Player = new Player() { Id = Int32.Parse(row["Player"]) },
                     Rank = Int32.Parse(row["Rank"])
                 };
 

@@ -2,7 +2,6 @@
 {
     public class PlayerRank
     {
-        // TODO: Rename Player to PlayerId and decouple scenarios
         public Player Player { get; set; }
         public int Rank { get; set; }
 

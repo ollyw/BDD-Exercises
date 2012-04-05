@@ -5,6 +5,7 @@ using PaperStoneScissors.Core;
 using PaperStoneScissors.Exceptions;
 using PaperStoneScissors.PaperStoneScissors;
 using PaperStoneScissors.Strategies;
+using PaperStoneScissors.Test.Helpers;
 
 namespace PaperStoneScissors.Test.UnitTests
 {
@@ -18,7 +19,8 @@ namespace PaperStoneScissors.Test.UnitTests
         [ExpectedArgumentOutOfRangeException]
         public void GameShouldThrowExceptionIfLessThanTwoPlayersAreSelected(int numberOfPlayers)
         {
-            var game = new Game<Round>(numberOfPlayers, new BestOfGamePlayingStrategy(1));
+            var players = HelperExtensions.GeneratePlayers(numberOfPlayers);
+            var game = new Game<Round>(players, new BestOfGamePlayingStrategy(1));
         }
 
         [Test]
@@ -32,9 +34,9 @@ namespace PaperStoneScissors.Test.UnitTests
             round2.AddSelection(1, PaperStoneScissorsGameObject.Scissors);
             round2.AddSelection(2, PaperStoneScissorsGameObject.Paper);
 
-            var numberOfPlayers = 2;
+            var players = HelperExtensions.GeneratePlayers(2);
 
-            var game = new Game<Round>(numberOfPlayers, new FirstToGamePlayingStrategy(1));
+            var game = new Game<Round>(players, new FirstToGamePlayingStrategy(1));
 
             game.AddRoundResult(round1);
             
@@ -56,9 +58,9 @@ namespace PaperStoneScissors.Test.UnitTests
             round3.AddSelection(1, PaperStoneScissorsGameObject.Scissors);
             round3.AddSelection(2, PaperStoneScissorsGameObject.Paper);
 
-            var numberOfPlayers = 2;
+            var players = HelperExtensions.GeneratePlayers(2);
 
-            var game = new Game<Round>(numberOfPlayers, new FirstToGamePlayingStrategy(3));
+            var game = new Game<Round>(players, new FirstToGamePlayingStrategy(3));
 
             game.AddRoundResult(round1);
             game.AddRoundResult(round2);

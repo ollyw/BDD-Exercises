@@ -14,9 +14,14 @@ namespace PaperStoneScissors.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult NewGameDetails()
+        public ActionResult NewGameDetails(string playerName)
         {
-            Game = new Game<Round>(2, new BestOfGamePlayingStrategy(3));
+            var players = new Player[] {
+                new Player() {Id = 1, Name = playerName },
+                new Player() {Id = 2, Name = "Computer" }
+            };
+
+            Game = new Game<Round>(players, new BestOfGamePlayingStrategy(3));
             return RedirectToAction("PlayRound");
         }
 

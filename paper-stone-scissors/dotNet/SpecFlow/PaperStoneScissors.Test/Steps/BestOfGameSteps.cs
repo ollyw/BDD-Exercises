@@ -2,6 +2,7 @@
 using PaperStoneScissors.PaperStoneScissors;
 using PaperStoneScissors.Strategies;
 using TechTalk.SpecFlow;
+using PaperStoneScissors.Test.Helpers;
 
 namespace PaperStoneScissors.Test.Steps
 {
@@ -19,13 +20,15 @@ namespace PaperStoneScissors.Test.Steps
         [Given(@"I have chosen a best of (.*) game")]
         public void GivenIHaveChosenABestOfXGames(int maximumNumberOfGames)
         {
-            Game = new Game<Round>(2, new BestOfGamePlayingStrategy(maximumNumberOfGames));
+            var players = HelperExtensions.GeneratePlayers(2);
+            Game = new Game<Round>(players, new BestOfGamePlayingStrategy(maximumNumberOfGames));
         }
 
         [Given(@"a game with (.*) player(?:|s) and best of (.*)")]
         public void GivenAGameWithXPlayersAndBestOfY(int numberOfPlayers, int maximumNumberOfGames)
         {
-            Game = new Game<Round>(numberOfPlayers, new BestOfGamePlayingStrategy(maximumNumberOfGames));
+            var players = HelperExtensions.GeneratePlayers(numberOfPlayers);
+            Game = new Game<Round>(players, new BestOfGamePlayingStrategy(maximumNumberOfGames));
         }
     }
 }

@@ -13,21 +13,15 @@ namespace PaperStoneScissors.Core
         public IList<RoundType> Rounds { get; private set; }
         public bool Complete { get; private set; }
 
-        public Game(int numberOfPlayers, IGamePlayingStrategy playingStrategy)
+        public Game(IEnumerable<Player> players, IGamePlayingStrategy playingStrategy)
         {
-            if (numberOfPlayers < 2)
+            if (players.Count() < 2)
             {
-                throw new ArgumentOutOfRangeException("numberOfPlayers", numberOfPlayers, "A game must have two more players");
+                throw new ArgumentOutOfRangeException("numberOfPlayers", players.Count(), "A game must have two more players");
             }
 
-            Players = new Dictionary<int, Player>();
+            Players = players.ToDictionary(p => p.Id);
             Rounds = new List<RoundType>();
-
-            for (int p = 0; p < numberOfPlayers; p++)
-            {
-                var id = p + 1;
-                Players.Add(id, new Player() { PlayerId = id });
-            }
 
             this.PlayingStrategy = playingStrategy;
         }
@@ -70,7 +64,7 @@ namespace PaperStoneScissors.Core
                 throw new GameCompletedWithDrawException();
             }
 
-            return ranking.First().Player.PlayerId;
+            return ranking.First().Player.Id;
         }
 
         public IEnumerable<PlayerRank> GetRanking()
@@ -81,7 +75,7 @@ namespace PaperStoneScissors.Core
             }
 
             var orderedPlayers = from player in Players.Values
-                          orderby player.Wins descending, player.PlayerId
+                          orderby player.Wins descending, player.Id
                           select player;
 
             int currentRank = 0;
@@ -99,7 +93,7 @@ namespace PaperStoneScissors.Core
             }
 
             var orderedRanking = from rank in ranking
-                                 orderby rank.Rank, rank.Player.PlayerId
+                                 orderby rank.Rank, rank.Player.Id
                                  select rank;
 
             return orderedRanking.ToArray();

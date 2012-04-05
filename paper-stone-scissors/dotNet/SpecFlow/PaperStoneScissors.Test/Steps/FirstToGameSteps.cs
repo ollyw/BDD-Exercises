@@ -2,6 +2,7 @@
 using PaperStoneScissors.PaperStoneScissors;
 using PaperStoneScissors.Strategies;
 using TechTalk.SpecFlow;
+using PaperStoneScissors.Test.Helpers;
 
 namespace PaperStoneScissors.Test.Steps
 {
@@ -19,13 +20,15 @@ namespace PaperStoneScissors.Test.Steps
         [Given(@"I have chosen a first to (\d*) game")]
         public void GivenIHaveChosenAFirstToXGames(int winningNumberOfRounds)
         {
-            Game = new Game<Round>(2, new FirstToGamePlayingStrategy(winningNumberOfRounds));
+            var players = HelperExtensions.GeneratePlayers(2);
+            Game = new Game<Round>(players, new FirstToGamePlayingStrategy(winningNumberOfRounds));
         }
 
         [Given(@"a game with (\d*) players and first to (\d*)")]
         public void GivenAGameWithXPlayersAndFirstToYGames(int numberOfPlayers, int winningNumberOfRounds)
         {
-            Game = new Game<Round>(numberOfPlayers, new FirstToGamePlayingStrategy(winningNumberOfRounds));
+            var players = HelperExtensions.GeneratePlayers(numberOfPlayers);
+            Game = new Game<Round>(players, new FirstToGamePlayingStrategy(winningNumberOfRounds));
         }
     }
 }

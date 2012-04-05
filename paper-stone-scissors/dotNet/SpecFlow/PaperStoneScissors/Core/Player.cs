@@ -5,8 +5,9 @@ namespace PaperStoneScissors.Core
 {
     public class Player
     {
-        public int PlayerId { get; set; }
+        public int Id { get; set; }
         public IList<PlayerRound> Rounds { get; private set; }
+        public string Name { get; set; } 
         
         public Player()
         {
@@ -30,12 +31,12 @@ namespace PaperStoneScissors.Core
                 return false;
             }
 
-            return otherPlayer.PlayerId == this.PlayerId;
+            return otherPlayer.Id == this.Id;
         }
 
         public override int GetHashCode()
         {
-            return 45 ^ PlayerId.GetHashCode();
+            return 45 ^ Id.GetHashCode();
         }
     }
 }
