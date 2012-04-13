@@ -35,6 +35,9 @@
   <ItemGroup>
     <Reference Include="Gallio" />
     <Reference Include="MbUnit" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NHamcrest, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31c3ea0b6fcf8c4a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -53,6 +56,12 @@
     <Reference Include="TechTalk.SpecFlow">
       <HintPath>packages\SpecFlow.1.8.1\lib\net35\TechTalk.SpecFlow.dll</HintPath>
     </Reference>
+    <Reference Include="WebDriver">
+      <HintPath>..\packages\Selenium.WebDriver.2.21.0\lib\net40\WebDriver.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver.Support">
+      <HintPath>..\packages\Selenium.Support.2.21.0\lib\net40\WebDriver.Support.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Features\BestOfGame.feature.cs">
@@ -70,13 +79,30 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ObjectComparison.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\SinglePlayer.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SinglePlayer.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\TakeTurnsPlay.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TakeTurnsPlay.feature</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\HelperExtensions.cs" />
+    <Compile Include="Features\MultiplePlayers.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MultiplePlayers.feature</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steps\BestOfGameSteps.cs" />
     <Compile Include="Steps\FirstToGameSteps.cs" />
     <Compile Include="Steps\GameSteps.cs" />
     <Compile Include="Steps\ObjectComparison.cs" />
+    <Compile Include="Steps\WebSteps.cs" />
     <Compile Include="UnitTests\GameTests.cs" />
+    <Compile Include="Bindings\WebDriverBinding.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -92,9 +118,26 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ObjectComparison.feature.cs</LastGenOutput>
     </None>
+    <None Include="Features\SinglePlayer.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SinglePlayer.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\TakeTurnsPlay.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>TakeTurnsPlay.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\MultiplePlayers.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>MultiplePlayers.feature.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="..\lib\Webdriver\chromedriver.exe">
+      <Link>chromedriver.exe</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PaperStoneScissors\PaperStoneScissors.csproj">
       <Project>{7121B20E-4166-402C-82B8-1BC93B5FB58B}</Project>
