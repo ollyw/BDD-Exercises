@@ -12,9 +12,10 @@ namespace PaperStoneScissors.Test.PageObjects
         [FindsBy(How = How.CssSelector, Using = "a")]
         private IWebElement ContinueButton { get; set; }
 
-        public void Continue()
+        public RoundSelectionPage Continue()
         {
             ContinueButton.Click();
+            return new RoundSelectionPage();
         }
     }
 }

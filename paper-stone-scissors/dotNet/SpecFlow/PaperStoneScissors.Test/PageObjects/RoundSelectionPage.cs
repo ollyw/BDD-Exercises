@@ -36,10 +36,17 @@ namespace PaperStoneScissors.Test.PageObjects
             ScissorsInput.Click();
         }
 
-        public RoundResultsPage Submit()
+        public WebDriverPageBase Submit()
         {
             Form.Submit();
-            return new RoundResultsPage();
+            if (Driver.Title == "Game Results")
+            {
+                return new GameResultsPage();
+            }
+            else
+            {
+                return new RoundResultsPage();
+            }
         }
     }
 }

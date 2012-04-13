@@ -98,6 +98,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MultiplePlayers.feature</DependentUpon>
     </Compile>
+    <Compile Include="PageObjects\GameResultsPage.cs" />
     <Compile Include="PageObjects\GameSelectionPage.cs" />
     <Compile Include="PageObjects\RoundResultsPage.cs" />
     <Compile Include="PageObjects\RoundSelectionPage.cs" />

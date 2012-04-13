@@ -9,6 +9,7 @@ namespace PaperStoneScissors.Test.PageObjects
         public WebDriverPageBase()
         {
             PageFactory.InitElements(Driver, this);
+            CurrentPage = this;
         }
 
         protected IWebDriver Driver
@@ -16,6 +17,18 @@ namespace PaperStoneScissors.Test.PageObjects
             get
             {
                 return ScenarioContext.Current.Get<IWebDriver>();
+            }
+        }
+
+        public static WebDriverPageBase CurrentPage
+        {
+            get
+            {
+                return ScenarioContext.Current.Get<WebDriverPageBase>();
+            }
+            private set
+            {
+                ScenarioContext.Current.Set<WebDriverPageBase>(value);
             }
         }
     }

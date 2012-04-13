@@ -11,16 +11,21 @@ namespace PaperStoneScissors.Test.PageObjects
     public class GameSelectionPage : WebDriverPageBase
     {
         [FindsBy(How = How.Name, Using = "playerName")]
-        private IWebElement NumberOfGamesTextbox { get; set; }
+        private IWebElement PlayerNameTextbox { get; set; }
 
         public void SetNumberOfGames(int i)
         {
-            NumberOfGamesTextbox.SendKeys("1");
+            //NumberOfGamesTextbox.SendKeys("1");
+        }
+
+        public void SetPlayerName(string name)
+        {
+            PlayerNameTextbox.SendKeys(name);
         }
 
         public RoundSelectionPage Submit()
         {
-            NumberOfGamesTextbox.Submit();
+            PlayerNameTextbox.Submit();
             return new RoundSelectionPage();
         }
     }
