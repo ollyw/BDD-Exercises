@@ -15,7 +15,17 @@ namespace PaperStoneScissors.Test
     [Binding]
     public class WebDriverBinding
     {
-        IWebDriver webdriver;
+        IWebDriver WebDriver
+        {
+            get
+            {
+                return ScenarioContext.Current.Get<IWebDriver>();
+            }
+            set
+            {
+                ScenarioContext.Current.Set<IWebDriver>(value);
+            }
+        }
 
         [BeforeScenario("web")]
         public void Initialize()
@@ -23,7 +33,9 @@ namespace PaperStoneScissors.Test
             var assemblyPath = new System.IO.FileInfo(Assembly.GetExecutingAssembly().Location);
             var driverPath = @"C:\Users\valtechuk\Documents\BDD-examples\paper-stone-scissors\dotNet\SpecFlow\lib\Webdriver";
 
-            webdriver = new ChromeDriver(driverPath, new ChromeOptions(), TimeSpan.FromSeconds(10));
+            WebDriver = new ChromeDriver(driverPath, new ChromeOptions(), TimeSpan.FromSeconds(10));
+            WebDriver.Url = "http://localhost/PaperStoneScissors.Web";
+            WebDriver.Navigate();
         }
 
         [AfterScenario("web")]
@@ -31,12 +43,12 @@ namespace PaperStoneScissors.Test
         {
             try
             {
-                webdriver.Close();
+                WebDriver.Close();
             }
             catch
             {
                 // TODO: add some logging
-                webdriver.Dispose();
+                WebDriver.Dispose();
             }
         }
     }

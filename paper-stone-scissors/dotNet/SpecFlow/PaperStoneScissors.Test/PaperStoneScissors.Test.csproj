@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.0.0.4001\lib\net40-client\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Gallio" />
     <Reference Include="MbUnit" />
     <Reference Include="Newtonsoft.Json">
@@ -95,6 +98,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MultiplePlayers.feature</DependentUpon>
     </Compile>
+    <Compile Include="PageObjects\GameSelectionPage.cs" />
+    <Compile Include="PageObjects\RoundResultsPage.cs" />
+    <Compile Include="PageObjects\RoundSelectionPage.cs" />
+    <Compile Include="PageObjects\WebDriverPageBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steps\BestOfGameSteps.cs" />
     <Compile Include="Steps\FirstToGameSteps.cs" />
