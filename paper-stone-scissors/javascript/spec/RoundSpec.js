@@ -1,22 +1,28 @@
 describe("Round", function() {
- describe("Selecting a winner", function() {
-  it("should choose stone above scissors", function() {
+ describe("Ranking winners", function() {
+  it("should place stone above scissors", function() {
     var round = new Round();
     round.registerChoice(1, "stone");
     round.registerChoice(2, "scissors");
-    expect(round.selectWinner()).toEqual(1);
+    expect(round.getRanking()).toEqual([[1],[2]]);
   });
-  it("should choose scissors above paper", function() {
+  it("should place scissors above paper", function() {
     var round = new Round();
     round.registerChoice(1, "scissors");
     round.registerChoice(2, "paper");
-    expect(round.selectWinner()).toEqual(1);
+    expect(round.getRanking()).toEqual([[1], [2]]);
   });
-  it("should choose paper above stone", function() {
+  it("should place paper above stone", function() {
     var round = new Round();
     round.registerChoice(1, "paper");
     round.registerChoice(2, "stone");
-    expect(round.selectWinner()).toEqual(1);
+    expect(round.getRanking()).toEqual([[1], [2]]);
+  });
+  it("should draw when selections are the same", function() {
+    var round = new Round();
+    round.registerChoice(1, "paper");
+    round.registerChoice(2, "paper");
+    expect(round.getRanking()).toEqual([[1, 2]]);
   });
  });
 });
