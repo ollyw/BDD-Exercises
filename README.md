@@ -2,7 +2,7 @@
 
 **N.B. This is a work in progress**
 
-This repository holds some katas that help refine the way that I do BDD.
+This repository holds some katas (pronounced Car-tars) that help refine the way that I do BDD.
 
 Some of the areas that it should highlight are:
 
