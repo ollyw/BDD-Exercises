@@ -1,5 +1,3 @@
-var Board = Backbone.Model.extend({});
-
 var BoardWidget = Backbone.View.extend({
 	
 	tagName: 'table',
@@ -14,11 +12,11 @@ var BoardWidget = Backbone.View.extend({
 			alive;
 
 		html += '<tbody>';
-		for (row = 0; row < this.model.rows; row++) {
+		for (rowIndex = 0; rowIndex < this.model.get('rows'); rowIndex ++) {
 			html += '<tr>';
-			for (column = 0; column < this.model.columns; column++) {
-				alive = _.some(this.model.aliveCells, function (item) {
-					return (item.row === (row + 1) && item.column === (column + 1));
+			for (columnIndex = 0; columnIndex < this.model.get('columns'); columnIndex ++) {
+				alive = this.model.get('aliveCells').some(function (item) {
+					return (item.get('row') === (rowIndex + 1) && item.get('column') === (columnIndex + 1));
 				});
 				if (alive) {
 					html += '<td class="alive">1</td>';

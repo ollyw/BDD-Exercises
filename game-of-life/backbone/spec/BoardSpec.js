@@ -11,11 +11,11 @@ describe("Board Widget", function() {
 		});
 
     		it("should layout a table with the correct dimensions", function() {
-			var model = new Board(),
+			var model = new BoardModel(),
 				board;
 
-			model.rows = 10;
-			model.columns = 10;
+			model.set('rows', 10);
+			model.set('columns', 10);
 			board = new BoardWidget({ model: model });
 
 			container.append(board.render().$el);
@@ -25,13 +25,13 @@ describe("Board Widget", function() {
 		});
 
 		it('should display the life state of cells correctly', function () {
-			var model = new Board(),
+			var model = new BoardModel(),
 				board;
 			
-			model.rows = 2
-			model.columns = 3
-			model.aliveCells = [ { row: 1, column: 2 },
-							     { row: 2, column: 3 } ]
+			model.set('rows', 2);
+			model.set('columns', 3);
+			model.set('aliveCells',  new CellsCollection( [ { row: 1, column: 2 },
+							     { row: 2, column: 3 } ]))
 
 			board = new BoardWidget({ model: model });
 
