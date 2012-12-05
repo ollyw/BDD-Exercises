@@ -22,9 +22,12 @@
 .boardview td {
 	width: 100%;
 	height: 100%;
+}
+
+.boardview td.dead {
 	background-color: grey;
 }
 
-.boardview. td.alive {
+.boardview td.alive {
 	background-color: red;
 }
