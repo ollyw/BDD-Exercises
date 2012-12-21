@@ -8,3 +8,7 @@ class LiveCell (val row : Int, val column : Int) extends Location {
 		that.row == this.row && that.column == this.column
 	}
 }
+
+object LiveCell {
+  def apply(row : Int, column : Int) = new LiveCell(row, column)
+}

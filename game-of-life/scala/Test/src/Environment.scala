@@ -11,9 +11,7 @@ class Environment (val seeds: LiveCellSet) {
 	  for (c <- currentCells) {
 	    val neighbours = adjacentCells(c)
 	    									
-	    if (neighbours.size > 3) {
-	      // Do nothing
-	    } else {
+	    if (neighbours.size == 2 || neighbours.size == 3) {
 	      nextGeneration += c
 	    }
 	  }
@@ -21,7 +19,7 @@ class Environment (val seeds: LiveCellSet) {
 	  for (location <- currentCells.flatMap(adjacentLocations(_))) {
 		  val neighbours = adjacentCells(location)
 		  if (neighbours.size == 3) {
-			  nextGeneration += new LiveCell(location.row, location.column) 
+			  nextGeneration += LiveCell(location.row, location.column) 
 		  }
 	  }
 	  
