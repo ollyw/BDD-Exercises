@@ -10,6 +10,10 @@ import formatters.JsonFormats.LiveCellSetFormat
  
 object GameOfLife extends Controller {
   
+  def index = Action {
+    Ok(views.html.index())
+  }
+  
   def newGame = Action {
 	val seeds = LiveCellSet(LiveCell(0,0), LiveCell(0,1))
 	val environment = new Environment(seeds)

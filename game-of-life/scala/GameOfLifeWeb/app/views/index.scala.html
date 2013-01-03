@@ -1,7 +1,21 @@
-@(message: String)
+@main("Welcome to the Game Of Life") {
+    <h1>The board goes here</h1>
+    <div id="testBoard" style="top: 100px; left: 100px; position:absolute;"></div>
+    <script type="text/javascript">
+    		var container = $('#testBoard'),
+    			model = new BoardModel(),
+    			cellsCollection = new CellsCollection(),
+				board;
+			
+			cellsCollection.on('reset', function (collection) {
+				model.set('rows', 20);
+				model.set('columns', 60);
+				model.set('aliveCells',  cellsCollection)
+				board = new BoardWidget({ model: model });
 
-@main("Welcome to Play 2.0") {
-    
-    @play20.welcome(message)
-    
+				container.append(board.render().$el);
+			});
+			
+			cellsCollection.fetch();
+	</script
 }

@@ -3,7 +3,7 @@
 # ~~~~
 
 # Home page
-GET     /		                   	controllers.Application.index
+GET     /		                   	controllers.GameOfLife.index
 GET     /gameoflife/newgame         controllers.GameOfLife.newGame
 POST     /gameoflife/nextgeneration         controllers.GameOfLife.nextGeneration
 

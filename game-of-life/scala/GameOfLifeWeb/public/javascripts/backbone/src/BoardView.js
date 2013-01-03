@@ -16,7 +16,7 @@ var BoardWidget = Backbone.View.extend({
 			html += '<tr>';
 			for (columnIndex = 0; columnIndex < this.model.get('columns'); columnIndex ++) {
 				alive = this.model.get('aliveCells').some(function (item) {
-					return (item.get('row') === (rowIndex + 1) && item.get('column') === (columnIndex + 1));
+					return (item.get('row') === (rowIndex) && item.get('column') === (columnIndex));
 				});
 				if (alive) {
 					html += '<td class="alive">1</td>';
