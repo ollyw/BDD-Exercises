@@ -8,7 +8,7 @@ object ApplicationBuild extends Build {
     val appVersion      = "1.0-SNAPSHOT"
 
     val appDependencies = Seq(
-    	"gameoflife" % "logic" % "0.0.1"//,
+    	"gameoflife" % "logic" % "0.0.1-SNAPSHOT"//,
     	//"org.scala-lang" % "scala-compiler" % "2.9.1",
     	//"org.scala-tools" %% "scala-stm" % "0.3"
     )

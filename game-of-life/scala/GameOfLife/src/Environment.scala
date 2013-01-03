@@ -5,7 +5,7 @@ import scala.math.abs
 class Environment (val seeds: LiveCellSet) {
 	var currentCells: LiveCellSet = seeds
 	
-	def tick () {
+	def tick () : LiveCellSet = {
 	  val nextGeneration = LiveCellSet.newBuilder
 	  
 	  for (c <- currentCells) {
@@ -24,6 +24,7 @@ class Environment (val seeds: LiveCellSet) {
 	  }
 	  
 	  currentCells = nextGeneration.result
+	  currentCells
 	}
 	
 	def adjacentCells (location : Location) : LiveCellSet = {

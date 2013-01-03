@@ -19,7 +19,7 @@ object GameOfLife extends Controller {
   
   def nextGeneration = Action(parse.json) { request =>
   	request.body.asOpt[LiveCellSet].map { seeds => 
-  		Ok(Json.toJson(new Environment(seeds).currentCells))
+  		Ok(Json.toJson(new Environment(seeds).tick()))
     }.getOrElse(BadRequest("Missing parameter [name]"))
   }
 }
