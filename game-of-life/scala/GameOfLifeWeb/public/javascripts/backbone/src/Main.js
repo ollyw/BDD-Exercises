@@ -12,12 +12,16 @@
 		
 		container = $('#testBoard');
 		
-		cellsCollection.on('reset', function () {
+		model.on('reset', function () {
 			container.append(board.render().$el);
 		});
 		
 		$('button').click(newGame);
 	});
+	
+	function newGameSuccess(data) {
+		cellsCollection.reset(data);
+	}
 	
 	function newGame() {
 		var rows = $('input[name=rows]').val(),
@@ -26,7 +30,16 @@
 		model.set('rows', rows);
 		model.set('columns', columns);
 		
-		cellsCollection.fetch();
+		var data = model.toJSON();
+		
+		$.ajax({
+			  type: 'POST',
+			  url: model.url,
+			  data: JSON.stringify({ "rows": rows, "columns": columns }),
+			  success: newGameSuccess,
+			  dataType: "json"
+			});
+		//model.fetch();
 	}
 
 })()

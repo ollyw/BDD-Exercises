@@ -4,7 +4,7 @@
 
 # Home page
 GET     /		                   	controllers.GameOfLife.index
-GET     /gameoflife/newgame         controllers.GameOfLife.newGame
+POST     /gameoflife/newgame         controllers.GameOfLife.newGame
 POST     /gameoflife/nextgeneration         controllers.GameOfLife.nextGeneration
 
 # Map static resources from the /public folder to the /assets URL path
