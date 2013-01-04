@@ -3,6 +3,7 @@ package formatters
 import play.api.libs.json._
 
 import gameoflife.implementation._
+import models._
 
 object JsonFormats {
   
@@ -18,5 +19,9 @@ object JsonFormats {
 	def reads(json: JsValue): LiveCellSet = LiveCellSet(json.as[Seq[LiveCell]]: _*)
     
 	def writes(s: LiveCellSet): JsValue = Json.toJson(s.map(Json.toJson(_)))
+  }
+  
+  implicit object GameFormat extends Format[Game] {
+    def reads(json: JsValue): Game = new Game((json \ "rows").as[Int], (json \ "columns").as[Int])
   }
 }

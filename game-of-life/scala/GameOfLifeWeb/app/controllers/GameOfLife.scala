@@ -5,8 +5,8 @@ import play.api.mvc._
 import play.api.libs.json._
 
 import gameoflife.implementation._
-
-import formatters.JsonFormats.LiveCellSetFormat
+import models._;
+import formatters.JsonFormats._;
  
 object GameOfLife extends Controller {
   
@@ -14,11 +14,13 @@ object GameOfLife extends Controller {
     Ok(views.html.index())
   }
   
-  def newGame = Action {
-	val seeds = LiveCellSet(LiveCell(0,0), LiveCell(0,1))
-	val environment = new Environment(seeds)
-			environment.currentCells
+  def newGame = Action(parse.json) { request => {
+	  val game = request.body.as[Game]
+	  val seeds = LiveCellSet.newFromRandom(game.rows, game.columns, 20)
+	  val environment = new Environment(seeds)
+	  
 	  Ok(Json.toJson(environment.currentCells))
+  	}
   }
   
   def nextGeneration = Action(parse.json) { request =>

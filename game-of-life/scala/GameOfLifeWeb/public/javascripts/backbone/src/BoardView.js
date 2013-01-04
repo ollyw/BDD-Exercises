@@ -28,6 +28,7 @@ var BoardWidget = Backbone.View.extend({
 		}
 		html += '</tbody>';
 
+		this.$el.empty();
 		this.$el.append(html);
 
 		return this;

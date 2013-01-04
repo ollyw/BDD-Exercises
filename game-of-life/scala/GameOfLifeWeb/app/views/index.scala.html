@@ -1,21 +1,8 @@
 @main("Welcome to the Game Of Life") {
     <h1>The board goes here</h1>
+    <button id="newGame">New Game</button>
+    <input type="range" name="rows" min="1" max="60" value="15">
+    <input type="range" name="columns" min="1" max="40" value="20">
     <div id="testBoard" style="top: 100px; left: 100px; position:absolute;"></div>
-    <script type="text/javascript">
-    		var container = $('#testBoard'),
-    			model = new BoardModel(),
-    			cellsCollection = new CellsCollection(),
-				board;
-			
-			cellsCollection.on('reset', function (collection) {
-				model.set('rows', 20);
-				model.set('columns', 60);
-				model.set('aliveCells',  cellsCollection)
-				board = new BoardWidget({ model: model });
 
-				container.append(board.render().$el);
-			});
-			
-			cellsCollection.fetch();
-	</script
 }
