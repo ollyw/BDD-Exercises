@@ -23,5 +23,6 @@ object JsonFormats {
   
   implicit object GameFormat extends Format[Game] {
     def reads(json: JsValue): Game = new Game((json \ "rows").as[Int], (json \ "columns").as[Int])
+    def writes(s: Game): JsValue = Json.toJson(Map("rows" -> Json.toJson(s.rows), "columns" -> Json.toJson(s.columns)))
   }
 }
