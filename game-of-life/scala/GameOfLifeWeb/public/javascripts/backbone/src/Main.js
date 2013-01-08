@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 (function () {
 	var container,
 		model = new BoardModel(),
@@ -21,6 +21,8 @@
 	
 	function newGameSuccess(data) {
 		cellsCollection.reset(data);
+		container.append(board.render().$el);
+		setTimeout(updateToNextGeneration, 1000)
 	}
 	
 	function newGame() {
@@ -40,7 +42,24 @@
 			  dataType: "json",
 			  contentType: 'application/json'
 			});
-		//model.fetch();
 	}
-
+	
+	function updateToNextGeneration() {
+		var data = cellsCollection.toJSON();
+		$.ajax({
+			  type: 'POST',
+			  url: cellsCollection.url,
+			  data: JSON.stringify(data),
+			  success: updateToNextGenerationSuccess,
+			  dataType: "json",
+			  contentType: 'application/json'
+			});
+	}
+	
+	function updateToNextGenerationSuccess(data) {
+		cellsCollection.reset(data);
+		setTimeout(updateToNextGeneration, 1000)
+		container.append(board.render().$el);
+	}
+	
 })()
