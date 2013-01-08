@@ -37,7 +37,8 @@
 			  url: model.url,
 			  data: JSON.stringify({ "rows": rows, "columns": columns }),
 			  success: newGameSuccess,
-			  dataType: "json"
+			  dataType: "json",
+			  contentType: 'application/json'
 			});
 		//model.fetch();
 	}

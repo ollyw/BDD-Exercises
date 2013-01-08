@@ -1,9 +1,11 @@
 package formatters
 
 import play.api.libs.json._
-
+import org.slf4j.Logger
 import gameoflife.implementation._
 import models._
+import org.slf4j.LoggerFactory
+import scala.collection.immutable.StringOps
 
 object JsonFormats {
   
@@ -22,7 +24,14 @@ object JsonFormats {
   }
   
   implicit object GameFormat extends Format[Game] {
-    def reads(json: JsValue): Game = new Game((json \ "rows").as[Int], (json \ "columns").as[Int])
+    def reads(json: JsValue): Game = {
+    	
+    	val logger = LoggerFactory.getLogger("foo")
+    	logger.debug(json.toString)
+    	val rows = (json \ "rows").as[String].toInt
+    	val columns = (json \ "columns").as[String].toInt
+    	new Game(rows, columns)
+    }
     def writes(s: Game): JsValue = Json.toJson(Map("rows" -> Json.toJson(s.rows), "columns" -> Json.toJson(s.columns)))
   }
 }
