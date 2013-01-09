@@ -2,6 +2,7 @@ package gameoflife.implementation
 
 import scala.collection.generic.{GenericSetTemplate, GenericCompanion, CanBuildFrom}
 import scala.collection.mutable.{Builder, SetBuilder}
+//import scala.collection.immutable._
 import scala.collection.SetLike
 import scala.util.Random
 
@@ -15,6 +16,21 @@ class LiveCellSet(seq : LiveCell*) extends Set[LiveCell]
         else new LiveCellSet(seq filterNot (elem ==): _*)
     def contains (elem: LiveCell) : Boolean = seq exists (elem ==)
     def iterator : Iterator[LiveCell] = seq.iterator
+    
+    val stream: Stream[LiveCellSet] = {
+    	def loop(v: LiveCellSet): Stream[LiveCellSet] = v #:: loop(new Environment(v).tick)
+    	loop(this)
+    }
+    
+    override def toString() : String = this.foldLeft("")(_ + _.toString)
+    
+    override def equals(other : Any) : Boolean = {
+      println("using equals")
+      other match {
+        case that: LiveCellSet => (this &~ that).size == 0
+        case _ => false
+      }
+    }
 }
 
 object LiveCellSet {

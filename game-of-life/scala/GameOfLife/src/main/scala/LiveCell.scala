@@ -7,6 +7,8 @@ class LiveCell (val row : Int, val column : Int) extends Location {
 		
 		that.row == this.row && that.column == this.column
 	}
+	
+	override def toString = "{row:" + this.row.toString + " , col:" + this.column.toString + "}" 
 }
 
 object LiveCell {
