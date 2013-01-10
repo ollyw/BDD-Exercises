@@ -5,6 +5,7 @@ import scala.collection.mutable.{Builder, SetBuilder}
 //import scala.collection.immutable._
 import scala.collection.SetLike
 import scala.util.Random
+import scala.Math.abs
 
 class LiveCellSet(seq : LiveCell*) extends Set[LiveCell] 
                              with SetLike[LiveCell, LiveCellSet]
@@ -17,9 +18,36 @@ class LiveCellSet(seq : LiveCell*) extends Set[LiveCell]
     def contains (elem: LiveCell) : Boolean = seq exists (elem ==)
     def iterator : Iterator[LiveCell] = seq.iterator
     
+    // http://www.derekwyatt.org/2011/07/29/understanding-scala-streams-through-fibonacci/
+    // Right associative for methods ending in :
+    // http://locrianmode.blogspot.co.uk/2011/07/scala-by-name-parameter.html
     val stream: Stream[LiveCellSet] = {
-    	def loop(v: LiveCellSet): Stream[LiveCellSet] = v #:: loop(new Environment(v).tick)
-    	loop(this)
+/*          def unfoldLeft[A, B](seed: B) (f: B => Option[(B, A)]) = {
+            def loop(seed: B)(ls: Stream[A]): Stream[A] = f(seed) match {
+              case Some((b, a)) => loop(b)(a #:: ls)
+              case None => ls
+            }
+            
+            loop(seed)(Stream.empty[A])
+          }
+
+          unfoldLeft(this) (x: => if (x.size == 0) None else Some(LiveCellSet.nextGeneration(x), x)})
+*/
+
+         def loop(v: => LiveCellSet): Stream[LiveCellSet] = Stream.cons(v, {
+    		val nextGen = LiveCellSet.nextGeneration(v)
+	    	  if (nextGen.size == 0) {
+	    		  Stream.empty[LiveCellSet]
+	    	  } else {
+	    		  loop(nextGen)
+	    	  }
+    	})
+    	
+    	if (this.size == 0) {
+    	  	Stream.empty[LiveCellSet]
+    	} else {
+    		loop(this)
+    	}
     }
     
     override def toString() : String = this.foldLeft("")(_ + _.toString)
@@ -53,4 +81,38 @@ object LiveCellSet {
       }
       cellSet.result()
     }
+    
+    def nextGeneration (cells : LiveCellSet) : LiveCellSet = {
+	  val nextGeneration = LiveCellSet.newBuilder
+
+	  for (c <- cells) {
+	    val neighbours = adjacentCells(c, cells)
+	    									
+	    if (neighbours.size == 2 || neighbours.size == 3) {
+	      nextGeneration += c
+	    }
+	  }
+	  
+	  for (location <- cells.flatMap(adjacentLocations(_))) {
+		  val neighbours = adjacentCells(location, cells)
+		  if (neighbours.size == 3) {
+			  nextGeneration += LiveCell(location.row, location.column) 
+		  }
+	  }
+	  
+	  nextGeneration.result
+	}
+	
+	def adjacentCells (location : Location, cells : LiveCellSet) : LiveCellSet = {
+		cells.filter(neighbour => abs(location.row - neighbour.row) < 2 &&
+	    									abs(location.column - neighbour.column) < 2 &&
+	    									!(location.row == neighbour.row && location.column == neighbour.column ))
+	}
+	
+	def adjacentLocations (location: Location) = {
+		for (row <- location.row - 1 to location.row + 1;
+		    column <- location.column - 1 to location.column + 1
+		    if location.row != row && location.column != column)
+		  yield PossibleLocation(row, column)
+	}
 }
