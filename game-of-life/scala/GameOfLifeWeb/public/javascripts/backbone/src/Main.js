@@ -3,7 +3,8 @@
 	var container,
 		model = new BoardModel(),
 		board,
-		timer;
+		timer,
+		running = false;
 	
 	board = new BoardWidget({ model: model });
 	
@@ -15,6 +16,7 @@
 		$('#replayGame').click(replayGame);
 		$('#exampleGame').click(exampleGame);
 		$('#livelyGame').click(livelyGame);
+		$('#stop').click(cancelUpdate);
 	});
 	
 	function newGameSuccess(data) {
@@ -24,11 +26,12 @@
 	}
 	
 	function replayGame() {
-		clearInterval(timer);
+		cancelUpdate();
 		updateBoardDimensions();
 		
 		model.replay();
 		container.append(board.render().$el);
+		running = true;
 		queueUpdate()
 	}
 	
@@ -41,10 +44,12 @@
 	}
 	
 	function newGame() {
-		clearInterval(timer);
+		cancelUpdate();
 		
 		updateBoardDimensions();
 		var data = model.toJSON();
+		
+		running = true;
 		
 		$.ajax({
 			  type: 'POST',
@@ -57,7 +62,7 @@
 	}
 	
 	function exampleGame() {
-		clearInterval(timer);
+		cancelUpdate();
 		
 		var sample = [{"row":4,"column":14},{"row":10,"column":17},{"row":14,"column":1},{"row":5,"column":10},{"row":12,"column":1},{"row":13,"column":17},{"row":2,"column":17},{"row":4,"column":15},{"row":12,"column":11},{"row":8,"column":16},{"row":8,"column":15},{"row":2,"column":7},{"row":7,"column":15},{"row":8,"column":14},{"row":3,"column":8},{"row":9,"column":19},{"row":5,"column":3},{"row":10,"column":15},{"row":9,"column":14},{"row":10,"column":18}]
 		model.set('rows', 20);
@@ -65,14 +70,18 @@
 		model.get('seedCells').reset(sample);
 		model.replay();
 		
+		running = true;
+		
 		queueUpdate()
 	}
 	
 	function livelyGame() {
-		clearInterval(timer);
+		cancelUpdate();
 		
 		updateBoardDimensions();
 		var data = model.toJSON();
+		
+		running = true;
 		
 		$.ajax({
 			  type: 'GET',
@@ -102,7 +111,13 @@
 	}
 	
 	function queueUpdate() {
-		timer = setTimeout(updateToNextGeneration, $('#delay').val())
+		if (running === true) {
+			timer = setTimeout(updateToNextGeneration, $('#delay').val());
+		}
 	}
 	
+	function cancelUpdate() {
+		running = false;
+		clearInterval(timer);
+	}
 })()
