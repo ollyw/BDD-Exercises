@@ -28,4 +28,12 @@ object GameOfLife extends Controller {
   		Ok(Json.toJson(new Environment(seeds).tick()))
     }.getOrElse(BadRequest("Missing parameter [name]"))
   }
+  
+  def livelyGame = Action {
+    val seeds = (1 to 1000).map((i: Int) => LiveCellSet.newFromRandom(10, 10, 10) )
+    
+    val gameOfLifeStream = seeds.par.map(s => (s.stream take 200)).maxBy(_.last.size)
+    
+    Ok(Json.toJson(new Environment(gameOfLifeStream.head).tick()))
+  }
 }

@@ -3,8 +3,7 @@
 	var container,
 		model = new BoardModel(),
 		board,
-		timer,
-		interval = 750;
+		timer;
 	
 	board = new BoardWidget({ model: model });
 	
@@ -15,12 +14,13 @@
 		$('#newGame').click(newGame);
 		$('#replayGame').click(replayGame);
 		$('#exampleGame').click(exampleGame);
+		$('#livelyGame').click(livelyGame);
 	});
 	
 	function newGameSuccess(data) {
 		model.start(data);
 		container.append(board.render().$el);
-		timer = setTimeout(updateToNextGeneration, interval)
+		queueUpdate()
 	}
 	
 	function replayGame() {
@@ -29,7 +29,7 @@
 		
 		model.replay();
 		container.append(board.render().$el);
-		timer = setTimeout(updateToNextGeneration, interval);
+		queueUpdate()
 	}
 	
 	function updateBoardDimensions() {
@@ -65,7 +65,21 @@
 		model.get('seedCells').reset(sample);
 		model.replay();
 		
-		timer = setTimeout(updateToNextGeneration, interval)
+		queueUpdate()
+	}
+	
+	function livelyGame() {
+		clearInterval(timer);
+		
+		updateBoardDimensions();
+		var data = model.toJSON();
+		
+		$.ajax({
+			  type: 'GET',
+			  url: 'http://localhost:9000/gameoflife/livelygame',
+			  success: newGameSuccess,
+			  dataType: "json",
+			});
 	}
 	
 	function updateToNextGeneration() {
@@ -84,7 +98,11 @@
 		model.update(data);
 		updateBoardDimensions();
 		container.append(board.render().$el);
-		timer = setTimeout(updateToNextGeneration, interval)
+		queueUpdate()
+	}
+	
+	function queueUpdate() {
+		timer = setTimeout(updateToNextGeneration, $('#delay').val())
 	}
 	
 })()
