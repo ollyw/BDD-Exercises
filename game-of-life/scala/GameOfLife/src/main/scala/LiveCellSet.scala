@@ -2,10 +2,9 @@ package gameoflife.implementation
 
 import scala.collection.generic.{GenericSetTemplate, GenericCompanion, CanBuildFrom}
 import scala.collection.mutable.{Builder, SetBuilder}
-//import scala.collection.immutable._
 import scala.collection.SetLike
 import scala.util.Random
-import scala.Math.abs
+import scala.math.abs
 
 class LiveCellSet(seq : LiveCell*) extends Set[LiveCell] 
                              with SetLike[LiveCell, LiveCellSet]
@@ -22,18 +21,6 @@ class LiveCellSet(seq : LiveCell*) extends Set[LiveCell]
     // Right associative for methods ending in :
     // http://locrianmode.blogspot.co.uk/2011/07/scala-by-name-parameter.html
     val stream: Stream[LiveCellSet] = {
-/*          def unfoldLeft[A, B](seed: B) (f: B => Option[(B, A)]) = {
-            def loop(seed: B)(ls: Stream[A]): Stream[A] = f(seed) match {
-              case Some((b, a)) => loop(b)(a #:: ls)
-              case None => ls
-            }
-            
-            loop(seed)(Stream.empty[A])
-          }
-
-          unfoldLeft(this) (x: => if (x.size == 0) None else Some(LiveCellSet.nextGeneration(x), x)})
-*/
-
          def loop(v: => LiveCellSet): Stream[LiveCellSet] = Stream.cons(v, {
     		val nextGen = LiveCellSet.nextGeneration(v)
 	    	  if (nextGen.size == 0) {

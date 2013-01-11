@@ -40,7 +40,3 @@ class Environment (val seeds: LiveCellSet) {
 		  yield PossibleLocation(row, column)
 	}
 }
-
-object Environment {
-  
-}
