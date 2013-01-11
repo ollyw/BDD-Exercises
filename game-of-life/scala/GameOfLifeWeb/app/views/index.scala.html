@@ -1,13 +1,19 @@
 @main("Welcome to the Game Of Life") {
-    <h1>The board goes here</h1>
-    <button id="newGame">New Game</button>
-    <button id="replayGame">Replay Game</button>
-    <button id="exampleGame">Example Game</button>
-    <button id="livelyGame">Lively Game</button>
-    <button id="stop">Stop</button>
-    <label for="rows">Rows</label><input id="rows" type="range" name="rows" min="1" max="40" value="15">
-    <label for="columns">Columns</label><input id="columns" type="range" name="columns" min="1" max="60" value="20">
-    <label for="delay">Delay (ms)</label><input id="delay" type="range" name="columns" min="0" max="3000" value="1500">
-    <div id="testBoard" style="top: 100px; left: 100px; position:absolute;"></div>
+    <h1>The Game of Life</h1>
+    <div>
+	    <button id="newGame">New Game</button>
+	    <button id="replayGame">Replay Game</button>
+	    <button id="exampleGame">Example Game</button>
+	    <button id="livelyGame">Lively Game</button>
+	    <button id="stop">Stop</button>
+    </div>
+    <div>
+	    <label for="rows">Rows</label><input id="rows" type="range" name="rows" min="1" max="40" value="15">
+	    <label for="columns">Columns</label><input id="columns" type="range" name="columns" min="1" max="60" value="20">
+	    <label for="delay">Delay (ms)</label><input id="delay" type="range" name="columns" min="0" max="3000" value="1500">
+	</div>
+	<div>
+	    <div id="testBoard" style="top: 100px; left: 100px;"></div>
+    </div>
 
 }

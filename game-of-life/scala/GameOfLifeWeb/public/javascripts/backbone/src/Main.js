@@ -85,7 +85,7 @@
 		
 		$.ajax({
 			  type: 'GET',
-			  url: 'http://localhost:9000/gameoflife/livelygame',
+			  url: '/gameoflife/livelygame',
 			  success: newGameSuccess,
 			  dataType: "json",
 			});
