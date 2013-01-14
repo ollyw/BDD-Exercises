@@ -13,6 +13,7 @@ More information on this project can be found in this online presentation:
 http://prezi.com/dws1sbd-mg-n/learning-scala/
 
 To get started:
+- Ensure you have Java 1.6 SDK
 - Install SBT (on a Mac, using Homebrew is easiest)
 - Download and unzip the Play framework into this folder in your working directory. I used Play 2.0.4.
 - Change to GameOfLife folder and run sbt publish-local. A jar should be compiled and put into the local IVY repository
