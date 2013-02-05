@@ -6,7 +6,7 @@
 GET     /		                   		controllers.GameOfLife.index
 POST     /gameoflife/newgame         	controllers.GameOfLife.newGame
 POST     /gameoflife/nextgeneration     controllers.GameOfLife.nextGeneration
-GET     /gameoflife/livelygame         controllers.GameOfLife.livelyGame
+GET     /gameoflife/livelygame         controllers.GameOfLife.livelyGameAkka
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
