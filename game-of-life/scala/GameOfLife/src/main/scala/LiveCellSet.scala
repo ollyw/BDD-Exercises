@@ -5,6 +5,7 @@ import scala.collection.mutable.{Builder, SetBuilder}
 import scala.collection.SetLike
 import scala.util.Random
 import scala.math.abs
+import scala.language.postfixOps
 
 class LiveCellSet(seq : LiveCell*) extends Set[LiveCell] 
                              with SetLike[LiveCell, LiveCellSet]
