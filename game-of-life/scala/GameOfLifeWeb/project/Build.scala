@@ -14,7 +14,7 @@ object ApplicationBuild extends Build {
     )
 
     val main = PlayProject(appName, appVersion, appDependencies, mainLang = SCALA).settings(
-        scalaVersion := "2.9.1",
+        scalaVersion := "2.10.1",
         resolvers += (
             Resolver.url("my-test-repo", url("file://"+Path.userHome.absolutePath+"/.ivy2/local"))( Resolver.ivyStylePatterns )
         		//"Local Ivy Repository" at "file://"+Path.userHome.absolutePath+"/.ivy2/local"
